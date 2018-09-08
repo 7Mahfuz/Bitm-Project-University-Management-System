@@ -163,7 +163,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Migrations\201809080752462_One.cs" />
+    <Compile Include="Migrations\201809080752462_One.Designer.cs">
+      <DependentUpon>201809080752462_One.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\EntityModel\Course.cs" />
+    <Compile Include="Models\EntityModel\Department.cs" />
+    <Compile Include="Models\EntityModel\Semester.cs" />
+    <Compile Include="Models\EntityModel\Teacher.cs" />
+    <Compile Include="Models\EntityModel\TeacherDesignation.cs" />
+    <Compile Include="Models\ViewModel\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -224,6 +234,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201809080752462_One.resx">
+      <DependentUpon>201809080752462_One.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

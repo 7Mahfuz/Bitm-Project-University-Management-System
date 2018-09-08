@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System.Data.Entity;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace UniversityManagementSystem.Models
 {
@@ -12,6 +14,12 @@ namespace UniversityManagementSystem.Models
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
-        }
+           }
+
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Semester> Semesters { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<TeacherDesignation> TeacherDesignations { get; set; }
     }
 }
