@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -159,12 +161,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\GenericRepository.cs" />
+    <Compile Include="DAL\GenericUnitOfWork.cs" />
+    <Compile Include="DAL\_IGenericRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809081021193_One.cs" />
-    <Compile Include="Migrations\201809081021193_One.Designer.cs">
-      <DependentUpon>201809081021193_One.cs</DependentUpon>
+    <Compile Include="Migrations\201809091629035_One.cs" />
+    <Compile Include="Migrations\201809091629035_One.Designer.cs">
+      <DependentUpon>201809091629035_One.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModel\AllocateClassRoom.cs" />
@@ -234,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="BLL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -243,8 +249,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809081021193_One.resx">
-      <DependentUpon>201809081021193_One.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809091629035_One.resx">
+      <DependentUpon>201809091629035_One.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -261,7 +267,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>7044</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

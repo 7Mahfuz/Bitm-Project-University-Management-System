@@ -1,5 +1,4 @@
 using UniversityManagementSystem.Models;
-using UniversityManagementSystem.Models.EntityModel;
 
 namespace UniversityManagementSystem.Migrations
 {
@@ -15,7 +14,7 @@ namespace UniversityManagementSystem.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(UniversityManagementSystem.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
