@@ -20,22 +20,47 @@ namespace UniversityManagementSystem.BLL
             this.aUnitOfWork = _uow;
         }
 
-        public void Save(Department aDepartment)
+        public string Save(Department aDepartment)
         {
-            bool flag = aUnitOfWork.Repository<Department>().InsertModel(aDepartment);
-            aUnitOfWork.Save();
+            string Exist = IsExist(aDepartment);
+
+            if(Exist=="CodeExist")
+            {
+                return "Code is already Exist";
+            }
+            else if(Exist=="NameExist")
+            {
+                return "Name is already Exist";
+            }
+             else
+            {
+                bool flag = aUnitOfWork.Repository<Department>().InsertModel(aDepartment);
+                aUnitOfWork.Save();
+                return "Department Saved";
+            }
+
         }
 
-        public void Delete(Department aDepartment)
+        public string IsExist(Department aDepartment)
         {
-            bool flag = aUnitOfWork.Repository<Department>().DeleteModel(aDepartment);
-            aUnitOfWork.Save();
-        }
-        public void Update(Department aDepartment)
-        {
-            bool flag = aUnitOfWork.Repository<Department>().UpdateModel(aDepartment);
-            aUnitOfWork.Save();
-        }
+            int x = 0, y = 0;
+            x = aUnitOfWork.Repository<Department>().Count(a => a.Code == aDepartment.Code);
+             y= aUnitOfWork.Repository<Department>().Count(a => a.Name == aDepartment.Name);
+
+            if(x>0 && y==0)
+            {
+                return "CodeExist";
+            }
+            else if(x==0 && y>0)
+            {
+                return "NameExist";
+            }
+            else
+            {
+                return "Ok";
+            }
+
+        }       
 
         public IEnumerable<Department> GetAllDepartment()
         {
