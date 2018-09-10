@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using UniversityManagementSystem.Models;
@@ -21,37 +22,75 @@ namespace UniversityManagementSystem.DAL
 
         public int Count(Func<T, bool> predicate = null)
         {
-            throw new NotImplementedException();
+            if (predicate == null)
+            {
+                int x = _DbSet.Count();
+                return x;
+            }
+            else
+            {
+                int x = _DbSet.Count(predicate);
+                return x;
+            }
+
         }
 
         public bool DeleteModel(T model)
         {
-            throw new NotImplementedException();
+
+            bool flag = true;
+            try
+            {
+                _DbSet.Attach(model);
+                _DbSet.Remove(model);
+            }
+            catch { flag = false; };
+
+            return flag;
         }
 
         public IEnumerable<T> GetList(Func<T, bool> predicate = null)
         {
-            throw new NotImplementedException();
+            if (predicate != null)
+            {
+                return _DbSet.Where(predicate);
+            }
+            else return _DbSet.AsEnumerable();
+
         }
 
         public T GetModel(Func<T, bool> predicate = null)
         {
-            throw new NotImplementedException();
+            return _DbSet.FirstOrDefault(predicate);
         }
 
         public T GetModelById(int ModelId)
         {
-            throw new NotImplementedException();
+            return _DbSet.Find(ModelId);
         }
 
         public bool InsertModel(T model)
         {
-            throw new NotImplementedException();
+            bool flag = true;
+            try { _DbSet.Attach(model);
+                _DbSet.Add(model); }
+            catch { flag = false; };
+
+            return flag;
         }
 
         public bool UpdateModel(T model)
         {
-            throw new NotImplementedException();
+            bool flag = true;
+            try
+            {// _DbSet.Attach(model);
+                _DbSet.AddOrUpdate(model);
+
+            }
+            catch { flag = false; };
+
+            return flag;
         }
+
     }
 }
