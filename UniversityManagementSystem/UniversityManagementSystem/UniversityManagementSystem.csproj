@@ -160,7 +160,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BLL\CourseManager.cs" />
     <Compile Include="BLL\DepartmentManager.cs" />
+    <Compile Include="BLL\SemesterManager.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
@@ -172,6 +174,10 @@
     <Compile Include="Migrations\201809091629035_One.cs" />
     <Compile Include="Migrations\201809091629035_One.Designer.cs">
       <DependentUpon>201809091629035_One.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809112039265_Two.cs" />
+    <Compile Include="Migrations\201809112039265_Two.Designer.cs">
+      <DependentUpon>201809112039265_Two.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModel\AllocateClassRoom.cs" />
@@ -256,6 +262,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809091629035_One.resx">
       <DependentUpon>201809091629035_One.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809112039265_Two.resx">
+      <DependentUpon>201809112039265_Two.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
