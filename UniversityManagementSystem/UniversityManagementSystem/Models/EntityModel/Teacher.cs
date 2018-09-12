@@ -11,6 +11,8 @@ namespace UniversityManagementSystem.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+
+        [EmailAddress]
         public string Email { get; set; }
 
         public string ContactNo { get; set; }
@@ -18,6 +20,7 @@ namespace UniversityManagementSystem.Models
         public int DesignationId { get; set; }
 
         public int DepartmentId { get; set; }
+       
         public decimal CreditToBeTaken { get; set; }
 
     }

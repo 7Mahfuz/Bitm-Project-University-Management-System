@@ -163,8 +163,11 @@
     <Compile Include="BLL\CourseManager.cs" />
     <Compile Include="BLL\DepartmentManager.cs" />
     <Compile Include="BLL\SemesterManager.cs" />
+    <Compile Include="BLL\TeacherManager.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\GenericUnitOfWork.cs" />
     <Compile Include="DAL\_IGenericRepository.cs" />
@@ -246,6 +249,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Department\Index.cshtml" />
     <Content Include="Views\Department\Add.cshtml" />
+    <Content Include="Views\Course\Create.cshtml" />
+    <Content Include="Views\Teacher\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

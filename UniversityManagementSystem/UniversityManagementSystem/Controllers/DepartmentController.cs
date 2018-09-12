@@ -55,10 +55,10 @@ namespace UniversityManagementSystem.Controllers
                     return View(aDepartment);
                 }
 
-                aDepartmentManager.Save(aDepartment);
+                string msg=aDepartmentManager.Save(aDepartment);
                 ViewBag.CodeError = null;
                 ViewBag.NameError = null;
-                ViewBag.Msg = "Saved Succesfully";
+                ViewBag.Msg = msg;
                 ModelState.Clear();
                 return View(new Department());
             }
