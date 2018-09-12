@@ -10,10 +10,12 @@ namespace UniversityManagementSystem.Models
     {[Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
         public string RegNo { get; set; }
         public string ContactNo { get; set; }
         public string Address { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
         public int DepartmentId { get; set; }
