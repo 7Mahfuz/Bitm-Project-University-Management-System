@@ -34,7 +34,7 @@ namespace UniversityManagementSystem.BLL
             int x = 0;
             string msg = "";
             x = aUnitOfWork.Repository<Department>().Count(a => a.Code == code);
-            if (x == 0)
+            if (x > 0)
             {
                 return "Code is already Exist";
                     
@@ -57,16 +57,20 @@ namespace UniversityManagementSystem.BLL
             }
             return null;
          }
-        public bool NameCheck(string name)
+        public string NameCheck(string name)
         {
             int x = 0;
             bool flag = false;
             x = aUnitOfWork.Repository<Department>().Count(a => a.Name == name);
-            if (x == 0)
+            if (x > 0)
             {
-                flag = true;
+                return "Name already Exist";
             }
-            return flag;
+            if (name == null)
+            {
+                return "Name can not empyty";
+            }
+            return null;
         }
 
         public IEnumerable<Department> GetAllDepartment()

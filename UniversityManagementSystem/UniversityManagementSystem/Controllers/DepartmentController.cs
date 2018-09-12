@@ -35,17 +35,32 @@ namespace UniversityManagementSystem.Controllers
         {
             try
             {
-
+                bool errorStatus = false;
                 string codeError = aDepartmentManager.CodeCheck(aDepartment.Code);
                 if (codeError != null)
                 {
                     ViewBag.CodeError = codeError;
+                    errorStatus = true;
+                }
+
+                string nameError = aDepartmentManager.NameCheck(aDepartment.Name);
+                if (nameError != null)
+                {
+                    ViewBag.NameError = nameError;
+                    errorStatus = true;
+                }
+
+                if (errorStatus)
+                {
                     return View(aDepartment);
                 }
 
                 aDepartmentManager.Save(aDepartment);
-
-                return RedirectToAction("Index");
+                ViewBag.CodeError = null;
+                ViewBag.NameError = null;
+                ViewBag.Msg = "Saved Succesfully";
+                ModelState.Clear();
+                return View(new Department());
             }
             catch
             {
