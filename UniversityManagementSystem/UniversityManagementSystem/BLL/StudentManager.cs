@@ -32,10 +32,40 @@ namespace UniversityManagementSystem.BLL
             aStudent.Address = aStudentViewModel.Address;
             aStudent.DepartmentId = aStudentViewModel.DepartmentId;
 
-            Department aDepartment=
+            int numberOfStudent = aUnitOfWork.Repository<Student>().Count(x=>x.DepartmentId==aStudent.DepartmentId);
+            string numberStudent = "";
+            if (numberOfStudent < 10)
+            {
+                numberStudent += "00" + numberOfStudent.ToString();
+            }
+            else if (numberOfStudent > 9 && numberOfStudent < 100)
+            {
+                numberStudent += "0" + numberOfStudent.ToString();
+            }
+            else
+            {
+                numberStudent += numberOfStudent.ToString();
+            }
 
+            Department aDepartment = aUnitOfWork.Repository<Department>().GetModelById(aStudentViewModel.DepartmentId);
+            string reg = "";
 
-           // bool flag = aUnitOfWork.Repository<Student>().InsertModel(aStudent);
+            foreach (char ch in aDepartment.Code)
+            {
+                if (char.IsLetter(ch))
+                {
+                    reg += ch;
+                }
+                else
+                {
+                    reg += "-"+DateTime.Now.Year+"-"+numberStudent;
+                    break;
+                }
+            }
+
+            aStudent.RegNo = reg;
+
+             bool flag = aUnitOfWork.Repository<Student>().InsertModel(aStudent);
             return "Saved Succesfully";
         }
 

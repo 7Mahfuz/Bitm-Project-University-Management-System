@@ -197,7 +197,6 @@
     <Compile Include="Models\EntityModel\Teacher.cs" />
     <Compile Include="Models\EntityModel\TeacherDesignation.cs" />
     <Compile Include="Models\EntityModel\Student.cs" />
-    <Compile Include="Models\ViewModel\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
