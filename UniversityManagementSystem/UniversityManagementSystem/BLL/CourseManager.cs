@@ -88,6 +88,12 @@ namespace UniversityManagementSystem.BLL
         {
             IEnumerable<Course> courses = aUnitOfWork.Repository<Course>().GetList(x => x.DepartmentId == deptId);
             return courses;
-        } 
+        }
+
+        public Course GetACourse(int courseId)
+        {
+            Course aCourse = aUnitOfWork.Repository<Course>().GetModelById(courseId);
+            return aCourse;
+        }
     }
 }

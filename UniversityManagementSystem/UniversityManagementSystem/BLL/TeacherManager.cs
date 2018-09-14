@@ -48,7 +48,13 @@ namespace UniversityManagementSystem.BLL
         {
             IEnumerable<Teacher> teachers = aUnitOfWork.Repository<Teacher>().GetList(x => x.DepartmentId == deptId);
             return teachers;
-        } 
+        }
+
+        public Teacher GetATeacher(int teacherId)
+        {
+            Teacher aTeacher = aUnitOfWork.Repository<Teacher>().GetModelById(teacherId);
+            return aTeacher;
+        }
 
     }
 }

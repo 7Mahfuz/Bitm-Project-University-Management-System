@@ -72,7 +72,7 @@ namespace UniversityManagementSystem.DAL
         public bool InsertModel(T model)
         {
             bool flag = true;
-            try { _DbSet.Attach(model);
+            try {_DbSet.Attach(model);
                 _DbSet.Add(model); }
             catch { flag = false; };
 
