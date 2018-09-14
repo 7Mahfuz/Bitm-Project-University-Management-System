@@ -25,9 +25,9 @@ namespace UniversityManagementSystem.Controllers
         {
             IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
             ViewBag.DeptList = new SelectList(departments, "Id", "Name");
-            StudentViewModel aStudent=new StudentViewModel();
-            aStudent.Date=DateTime.Today;
-            return View(aStudent);
+            
+            ViewBag.Date=DateTime.Today;
+            return View();
         }
 
         //

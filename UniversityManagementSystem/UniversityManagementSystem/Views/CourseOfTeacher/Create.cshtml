@@ -1,0 +1,122 @@
+﻿@model UniversityManagementSystem.Models.CourseTeacherViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>CourseTeacherViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.DepartmentId)*@
+                @Html.DropDownListFor(model => model.DepartmentId, ViewBag.DeptList as SelectList, "-- Select Department --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DepartmentId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TeacherId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.TeacherId)*@
+                @Html.DropDownListFor(model => model.TeacherId, ViewBag.TeacherList as SelectList, "-- Select Teacher --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TeacherId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreditToTake, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreditToTake)
+                @Html.ValidationMessageFor(model => model.CreditToTake)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RemainingCredit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RemainingCredit)
+                @Html.ValidationMessageFor(model => model.RemainingCredit)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.CourseId)*@
+                @Html.DropDownListFor(model => model.CourseId, ViewBag.CourseList as SelectList, "-- Select Course --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CourseId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CourseName)
+                @Html.ValidationMessageFor(model => model.CourseName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseCredit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CourseCredit)
+                @Html.ValidationMessageFor(model => model.CourseCredit)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#DepartmentId").change(function () {
+            $.get("/CourseOfTeacher/GetTeacherList", { DepartmentId: $("#DepartmentId").val() }, function (data) {
+                $("#TeacherId").empty();
+                $.each(data, function (index, row) {
+                    $("#TeacherId").append("<option value='" + row.Id + "'>" + row.Name + "</option")
+
+                });
+
+            });
+
+        })
+
+
+        $("#DepartmentId").change(function () {
+            $.get("/Lab/GetRoomList", { DepartmentId: $("#DeoartmentId").val() }, function (data) {
+                $("#CourseId").empty();
+                $.each(data, function (index, row) {
+                    $("#Course").append("<option value='" + row.Id + "'>" + row.Name + "</option")
+
+                });
+
+            });
+
+        })
+
+    });
+
+</script>

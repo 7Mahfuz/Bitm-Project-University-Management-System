@@ -44,5 +44,11 @@ namespace UniversityManagementSystem.BLL
             return teacherDesignations;
         }
 
+        public IEnumerable<Teacher> GetTeacherByDeptId(int deptId)
+        {
+            IEnumerable<Teacher> teachers = aUnitOfWork.Repository<Teacher>().GetList(x => x.DepartmentId == deptId);
+            return teachers;
+        } 
+
     }
 }
