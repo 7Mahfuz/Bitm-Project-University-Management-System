@@ -36,15 +36,15 @@ namespace UniversityManagementSystem.BLL
             string numberStudent = "";
             if (numberOfStudent < 10)
             {
-                numberStudent += "00" + numberOfStudent.ToString();
+                numberStudent += "00" + (numberOfStudent+1).ToString();
             }
             else if (numberOfStudent > 9 && numberOfStudent < 100)
             {
-                numberStudent += "0" + numberOfStudent.ToString();
+                numberStudent += "0" + (numberOfStudent+1).ToString();
             }
             else
             {
-                numberStudent += numberOfStudent.ToString();
+                numberStudent += (numberOfStudent+1).ToString();
             }
 
             Department aDepartment = aUnitOfWork.Repository<Department>().GetModelById(aStudentViewModel.DepartmentId);
@@ -58,14 +58,15 @@ namespace UniversityManagementSystem.BLL
                 }
                 else
                 {
-                    reg += "-"+DateTime.Now.Year+"-"+numberStudent;
+                    
                     break;
                 }
             }
-
+            reg += "-" + DateTime.Now.Year + "-" + numberStudent;
             aStudent.RegNo = reg;
 
              bool flag = aUnitOfWork.Repository<Student>().InsertModel(aStudent);
+            aUnitOfWork.Save();
             return "Saved Succesfully";
         }
 

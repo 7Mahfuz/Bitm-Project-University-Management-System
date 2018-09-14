@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,8 +11,8 @@ namespace UniversityManagementSystem.Controllers
 {
     public class StudentController : Controller
     {
-        DepartmentManager aDepartmentManager=new DepartmentManager();
-        StudentManager aStudentManager=new StudentManager();
+        private DepartmentManager aDepartmentManager = new DepartmentManager();
+        private StudentManager aStudentManager = new StudentManager();
         //
         // GET: /Student/
         public ActionResult Index()
@@ -19,14 +20,14 @@ namespace UniversityManagementSystem.Controllers
             return View();
         }
 
-        
+
         // GET: /Student/Create
         public ActionResult Create()
         {
             IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
             ViewBag.DeptList = new SelectList(departments, "Id", "Name");
-            
-            ViewBag.Date=DateTime.Today;
+
+            ViewBag.Date = DateTime.Today;
             return View();
         }
 
@@ -37,19 +38,28 @@ namespace UniversityManagementSystem.Controllers
         {
             try
             {
+                IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
+                ViewBag.DeptList = new SelectList(departments, "Id", "Name");
                 string msg = aStudentManager.Save(aStudentViewModel);
-
-
-                return RedirectToAction("Index");
+                ViewBag.message = msg;
+                ModelState.Clear();
+                return View(new StudentViewModel());
             }
-            catch
+            catch (DbEntityValidationException e)
             {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
                 return View();
             }
+
         }
-
-        
-
-       
     }
 }

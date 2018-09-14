@@ -10,8 +10,7 @@ namespace UniversityManagementSystem.Models
     {[Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        [Required(ErrorMessage = "Email is Required")]
-        [EmailAddress(ErrorMessage = "Invalid Email")]
+        
         public string Email { get; set; }
         public string RegNo { get; set; }
         public string ContactNo { get; set; }

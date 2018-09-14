@@ -21,7 +21,7 @@ namespace UniversityManagementSystem.Models
 
         public int DepartmentId { get; set; }
        
-        public decimal CreditToBeTaken { get; set; }
+        public double CreditToBeTaken { get; set; }
 
     }
 }
