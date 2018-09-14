@@ -20,6 +20,10 @@ namespace UniversityManagementSystem.BLL
             this.aUnitOfWork = _uow;
         }
 
+        CourseManager aCourseManager=new CourseManager();
+        SemesterManager aSemesterManager = new SemesterManager();
+        TeacherManager aTeacherManager=new TeacherManager();
+
 
         public string Save(CourseTeacherViewModel aCourseTeacherViewModel)
         {
@@ -55,11 +59,38 @@ namespace UniversityManagementSystem.BLL
                 aUnitOfWork.Repository<CourseAssignTeacher>().GetList(x => x.DepartmentId == deptId);
             return assignList;
         }
-        public CourseAssignTeacher GetAssignDataByTeacherIdCourseId(int teacherId,int courseId)
+        public CourseAssignTeacher GetAssignDataByCourseId(int courseId)
         {
             CourseAssignTeacher aCourseAssignTeacher =
-                aUnitOfWork.Repository<CourseAssignTeacher>().GetModel(x => x.TeacherId == teacherId && x.CourseId==courseId);
+                aUnitOfWork.Repository<CourseAssignTeacher>().GetModel(x=>x.CourseId==courseId);
             return aCourseAssignTeacher;
+        }
+
+        public List<AssignedCourseListViewModel> GetAssignedListByDepartmentId(int departmentId)
+        {
+            IEnumerable<Course> courses = aUnitOfWork.Repository<Course>().GetList(x => x.DepartmentId == departmentId);
+            List<AssignedCourseListViewModel>aViewModelOfAssignedCourse=new List<AssignedCourseListViewModel>();
+            foreach (Course aCourse in courses)
+            {
+                CourseAssignTeacher aCourseAssignTeacher = GetAssignDataByCourseId(aCourse.Id);
+                Semester aSemester = aSemesterManager.GetASemester(aCourse.SemesterId);
+                AssignedCourseListViewModel aAssignedCourse=new AssignedCourseListViewModel();
+                aAssignedCourse.Code = aCourse.Code;
+                aAssignedCourse.Name = aCourse.Name;
+                aAssignedCourse.Semester = aSemester.Name;
+                if (aCourseAssignTeacher == null)
+                {
+                    aAssignedCourse.AssignedTo = "Not Assigned";
+                        ;
+                }
+                else
+                {
+                    Teacher aTeacher = aTeacherManager.GetATeacher(aCourseAssignTeacher.TeacherId);
+                    aAssignedCourse.AssignedTo = aTeacher.Name;
+                }
+                aViewModelOfAssignedCourse.Add(aAssignedCourse);
+            }
+            return aViewModelOfAssignedCourse;
         }
     }
 }

@@ -79,18 +79,7 @@ namespace UniversityManagementSystem.Controllers
 
         public JsonResult GetCourseListByTeacherId(int teacherId,int departmentId)
         {
-            //IEnumerable<Course> courses = aCourseManager.GetCourseByDeptId(departmentId);
-
-            //List<Course>filteredCourses=new List<Course>();
-            //foreach (Course aCourse in courses)
-            //{
-            //    CourseAssignTeacher aCourseAssignTeacher =aCourseAssignToTeacherManager.GetAssignDataByTeacherIdCourseId(teacherId, aCourse.Id);
-            //    if (aCourseAssignTeacher == null)
-            //    {
-            //        filteredCourses.Add(aCourse);
-            //    }
-            //}
-            //return Json(filteredCourses, JsonRequestBehavior.AllowGet);
+            
             IEnumerable<Course> coursesList = aCourseManager.GetCourseByDeptId(departmentId);
             IEnumerable<CourseAssignTeacher> assingList =
                 aCourseAssignToTeacherManager.GetListByDepartmentId(departmentId);
@@ -145,48 +134,19 @@ namespace UniversityManagementSystem.Controllers
             }
         }
 
-        // GET: CourseOfTeacher/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult AssignedCourseListShow()
         {
-            return View();
+            IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
+            ViewBag.DeptList = new SelectList(departments, "Id", "Name");
+            List<AssignedCourseListViewModel>list=new List<AssignedCourseListViewModel>();
+            return View(list);
         }
 
-        // POST: CourseOfTeacher/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public JsonResult GetAssignedList(int departmentId)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            List<AssignedCourseListViewModel> aViewModelOfAssignedCourseList =aCourseAssignToTeacherManager.GetAssignedListByDepartmentId(departmentId);
+            return Json(aViewModelOfAssignedCourseList, JsonRequestBehavior.AllowGet);
         }
-
-        // GET: CourseOfTeacher/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CourseOfTeacher/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+      
     }
 }

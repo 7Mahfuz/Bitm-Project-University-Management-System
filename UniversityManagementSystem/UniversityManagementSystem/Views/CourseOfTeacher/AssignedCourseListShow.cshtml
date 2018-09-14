@@ -1,0 +1,71 @@
+﻿@model IEnumerable<UniversityManagementSystem.Models.AssignedCourseListViewModel>
+
+@{
+    ViewBag.Title = "AssignedCourseListShow";
+}
+
+<div class="input-group">
+    <div class="col-md-10">
+       
+        @Html.DropDownList("Department", ViewBag.DeptList as SelectList, "-- Select Department --", new { @class = "form-control" })
+    </div>
+</div>
+
+
+<table id="table1" class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignedTo)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignedTo)
+        </td>
+       
+    </tr>
+}
+
+</table>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script>
+                $(document).ready(function () {
+
+                    $("#Department").change(function () {
+                        $("#table1").empty();
+                        $.get("/CourseOfTeacher/GetAssignedList", { departmentId: $("#Department").val() }, function (data) {
+                            var row;
+                            row += "<tr><th>" + "Code" + "</th><th>" + "Name/Title" + "</th><th>" + "Semester" + "</th><th>" + "AssignedTo" + "</th>";
+                            $.each(data, function (i, item) {
+
+                                row += "<tr><td>" + item.Code + "</td><td>" + item.Name + "</td><td>" + item.Semester + "</td><td>" + item.AssignedTo + "</td>";
+                            });
+                            $("#table1").append(row);
+                        });
+
+                    })
+                });
+</script>

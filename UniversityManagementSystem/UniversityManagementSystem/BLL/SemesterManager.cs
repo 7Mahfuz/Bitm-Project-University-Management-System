@@ -25,6 +25,12 @@ namespace UniversityManagementSystem.BLL
         {
             IEnumerable<Semester> semesters = aUnitOfWork.Repository<Semester>().GetList();
             return semesters;
-        } 
+        }
+
+        public Semester GetASemester(int semesterId)
+        {
+            Semester aSemester = aUnitOfWork.Repository<Semester>().GetModelById(semesterId);
+            return aSemester;
+        }
     }
 }

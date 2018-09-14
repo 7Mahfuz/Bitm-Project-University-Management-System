@@ -204,6 +204,7 @@
     <Compile Include="Models\EntityModel\TeacherDesignation.cs" />
     <Compile Include="Models\EntityModel\Student.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ViewModel\AssignedCourseListViewModel.cs" />
     <Compile Include="Models\ViewModel\CourseTeacherViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -261,6 +262,7 @@
     <Content Include="Views\Teacher\Create.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\CourseOfTeacher\Create.cshtml" />
+    <Content Include="Views\CourseOfTeacher\AssignedCourseListShow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
