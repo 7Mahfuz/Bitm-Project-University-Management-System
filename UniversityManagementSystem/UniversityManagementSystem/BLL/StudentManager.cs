@@ -12,6 +12,7 @@ namespace UniversityManagementSystem.BLL
     {
         DepartmentManager aDepartmentManager=new DepartmentManager();
         private GenericUnitOfWork aUnitOfWork = null;
+      CourseManager aCourseManager=new CourseManager();
 
         public StudentManager()
         {
@@ -69,6 +70,32 @@ namespace UniversityManagementSystem.BLL
             aUnitOfWork.Save();
             return "Saved Succesfully";
         }
+
+      public IEnumerable<Student> GetAllStudent()
+      {
+        IEnumerable<Student> students = aUnitOfWork.Repository<Student>().GetList();
+        return students;
+      }
+
+      public IEnumerable<Course> GetCourseListByStudentId(int studentId)
+      {
+        Student aStudent = aUnitOfWork.Repository<Student>().GetModelById(studentId);
+        IEnumerable<Course> courses = aCourseManager.GetCourseByDeptId(aStudent.DepartmentId);
+        return courses;
+      }
+
+      public Student GetAStudent(int studentId)
+      {
+        Student aStudent = aUnitOfWork.Repository<Student>().GetModelById(studentId);
+        return aStudent;
+      }
+
+      public Student GetAStudentWithDeptName(int studentId)
+      {
+        Student aStudent = aUnitOfWork.Repository<Student>().GetModelById(studentId);
+        Department aDepartment = aUnitOfWork.Repository<Department>().GetModelById(aStudent.DepartmentId);
+        return aStudent;
+      }
 
     }
 }

@@ -13,15 +13,7 @@ namespace UniversityManagementSystem.Controllers
     {
         private DepartmentManager aDepartmentManager = new DepartmentManager();
         private StudentManager aStudentManager = new StudentManager();
-        //
-        // GET: /Student/
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-
-        // GET: /Student/Create
+        CourseManager aCourseManager=new CourseManager();
         public ActionResult Create()
         {
             IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
@@ -61,5 +53,34 @@ namespace UniversityManagementSystem.Controllers
             }
 
         }
+
+
+      public ActionResult EnrollInCourse()
+      {
+        IEnumerable<Student> students = aStudentManager.GetAllStudent();
+        ViewBag.studentList=new SelectList(students,"Id","RegNo");
+
+        List<Course>courses=new List<Course>();
+        ViewBag.courseList = new SelectList(courses, "Id", "Name");
+        return View();
+      }
+
+      public JsonResult GetCourseList(int studentId)
+      {
+        IEnumerable<Course> courses = aStudentManager.GetCourseListByStudentId(studentId);
+        return Json(courses, JsonRequestBehavior.AllowGet);
+      }
+      public JsonResult GetStudent(int studentId)
+      {
+        IEnumerable<Course> courses = aStudentManager.GetCourseListByStudentId(studentId);
+        return Json(courses, JsonRequestBehavior.AllowGet);
+      }
+      [HttpPost]
+      public ActionResult EnrollInCourse(StudentEnrollViewModel aStudentEnrollViewModel)
+      {
+
+        return View();
+      }
+
     }
 }
