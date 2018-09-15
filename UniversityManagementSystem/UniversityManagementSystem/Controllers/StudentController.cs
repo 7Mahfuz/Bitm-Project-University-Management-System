@@ -114,5 +114,15 @@ namespace UniversityManagementSystem.Controllers
         return View();
       }
 
+
+      public ActionResult ViewStudentResult()
+      {
+        IEnumerable<Student> students = aStudentManager.GetAllStudent();
+        ViewBag.studentList = new SelectList(students, "Id", "RegNo");
+
+
+        return View();
+      }
+      
     }
 }

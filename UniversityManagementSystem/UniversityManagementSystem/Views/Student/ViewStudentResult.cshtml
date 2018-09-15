@@ -1,0 +1,127 @@
+﻿@model UniversityManagementSystem.Models.StudentResultViewModel
+
+@{
+    ViewBag.Title = "ViewStudentResult";
+}
+
+<h2>ViewStudentResult</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>StudentResultViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudentId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.StudentId, ViewBag.studentList as SelectList, "-- Select Student RegNo --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StudentId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DepartmentName)
+                @Html.ValidationMessageFor(model => model.DepartmentName)
+            </div>
+        </div>
+
+
+    </div>
+}
+
+<table id="table1" class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Course Code")
+        </th>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Grade")
+        </th>
+        <
+
+    </tr>
+
+   
+        <tr>
+            <td>
+              
+            </td>
+            <td>
+               
+            </td>
+            <td>
+            
+            </td>
+            
+
+        </tr>
+   
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $(document).ready(function () {
+       
+            //For student's TExt boxes
+            $("#StudentId").change(function () {
+                $.get("/Student/GetStudent", { StudentId: $("#StudentId").val() }, function (data) {
+                    $('#Name').val('');
+                    $('#Email').val('');
+                    $('#DepartmentName').val('');
+                    // $('#CreditToTake').val(data);
+                    $('#Name').val(data.Name);
+                    $('#Email').val(data.Email);
+                    $('#DepartmentName').val(data.RegNO);
+
+                });
+
+            });
+
+        //For list show
+            $("#StudentId").change(function () {
+                $("#table1").empty();
+                $.get("/Student/GetResultList", { studentId: $("#StudentId").val() }, function (data) {
+                    var row;
+                    row += "<tr><th>" + "Course Code" + "</th><th>" + "Name" + "</th><th>" + "Grade" + "</th>";
+                    $.each(data, function (i, item) {
+
+                        row += "<tr><td>" + item.Code + "</td><td>" + item.Name + "</td><td>" + item.Grade + "</td>";
+                    });
+                    $("#table1").append(row);
+                });
+
+            });
+
+
+        });
+   
+</script>

@@ -213,6 +213,7 @@
     <Compile Include="Models\ViewModel\StudentEnrollViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentResultViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
+    <Compile Include="Models\ViewModel\ViewResultViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -271,6 +272,7 @@
     <Content Include="Views\CourseOfTeacher\AssignedCourseListShow.cshtml" />
     <Content Include="Views\Student\EnrollInCourse.cshtml" />
     <Content Include="Views\Student\SaveResult.cshtml" />
+    <Content Include="Views\Student\ViewStudentResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

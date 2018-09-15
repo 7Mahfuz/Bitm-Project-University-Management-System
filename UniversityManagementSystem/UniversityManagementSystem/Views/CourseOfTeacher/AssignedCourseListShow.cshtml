@@ -54,18 +54,18 @@
 <script>
                 $(document).ready(function () {
 
-                    $("#Department").change(function () {
+                    $("#Department").change(function() {
                         $("#table1").empty();
-                        $.get("/CourseOfTeacher/GetAssignedList", { departmentId: $("#Department").val() }, function (data) {
+                        $.get("/CourseOfTeacher/GetAssignedList", { departmentId: $("#Department").val() }, function(data) {
                             var row;
                             row += "<tr><th>" + "Code" + "</th><th>" + "Name/Title" + "</th><th>" + "Semester" + "</th><th>" + "AssignedTo" + "</th>";
-                            $.each(data, function (i, item) {
+                            $.each(data, function(i, item) {
 
                                 row += "<tr><td>" + item.Code + "</td><td>" + item.Name + "</td><td>" + item.Semester + "</td><td>" + item.AssignedTo + "</td>";
                             });
                             $("#table1").append(row);
                         });
 
-                    })
+                    });
                 });
 </script>
