@@ -94,8 +94,11 @@ namespace UniversityManagementSystem.BLL
       {
         Student aStudent = aUnitOfWork.Repository<Student>().GetModelById(studentId);
         Department aDepartment = aUnitOfWork.Repository<Department>().GetModelById(aStudent.DepartmentId);
+        aStudent.RegNo = aDepartment.Name;
         return aStudent;
       }
+
+
 
     }
 }

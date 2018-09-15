@@ -72,9 +72,10 @@ namespace UniversityManagementSystem.Controllers
       }
       public JsonResult GetStudent(int studentId)
       {
-        IEnumerable<Course> courses = aStudentManager.GetCourseListByStudentId(studentId);
-        return Json(courses, JsonRequestBehavior.AllowGet);
+        Student aStudent = aStudentManager.GetAStudentWithDeptName(studentId);
+        return Json(aStudent, JsonRequestBehavior.AllowGet);
       }
+
       [HttpPost]
       public ActionResult EnrollInCourse(StudentEnrollViewModel aStudentEnrollViewModel)
       {
