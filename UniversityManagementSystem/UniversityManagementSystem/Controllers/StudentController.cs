@@ -79,6 +79,37 @@ namespace UniversityManagementSystem.Controllers
       [HttpPost]
       public ActionResult EnrollInCourse(StudentEnrollViewModel aStudentEnrollViewModel)
       {
+        IEnumerable<Student> students = aStudentManager.GetAllStudent();
+        ViewBag.studentList = new SelectList(students, "Id", "RegNo");
+
+        List<Course> courses = new List<Course>();
+        ViewBag.courseList = new SelectList(courses, "Id", "Name");
+        aStudentManager.EnrollStudentSave(aStudentEnrollViewModel);
+
+        ModelState.Clear();
+        return View(new StudentResultViewModel());
+      }
+
+
+      public ActionResult SaveResult()
+      {
+        IEnumerable<Student> students = aStudentManager.GetAllStudent();
+        ViewBag.studentList = new SelectList(students, "Id", "RegNo");
+
+        List<Course> courses = new List<Course>();
+        ViewBag.courseList = new SelectList(courses, "Id", "Name");
+        return View();
+      }
+      [HttpPost]
+      public ActionResult SaveResult(StudentResultViewModel aStudentResultViewModel)
+      {
+        IEnumerable<Student> students = aStudentManager.GetAllStudent();
+        ViewBag.studentList = new SelectList(students, "Id", "RegNo");
+
+        List<Course> courses = new List<Course>();
+        ViewBag.courseList = new SelectList(courses, "Id", "Name");
+
+
 
         return View();
       }

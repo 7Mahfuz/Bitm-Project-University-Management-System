@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using UniversityManagementSystem.DAL;
 using UniversityManagementSystem.Models;
+using UniversityManagementSystem.Models.EntityModel;
 
 
 namespace UniversityManagementSystem.BLL
@@ -70,6 +71,29 @@ namespace UniversityManagementSystem.BLL
             aUnitOfWork.Save();
             return "Saved Succesfully";
         }
+
+
+      public void EnrollStudentSave(StudentEnrollViewModel aStudentEnrollViewModel)
+      {
+        StudentEnrollInCourse aStudentEnrollInCourse=new StudentEnrollInCourse();
+        aStudentEnrollInCourse.StudentId = aStudentEnrollViewModel.StudentId;
+        aStudentEnrollInCourse.CourseId = aStudentEnrollViewModel.CourseId;
+        aStudentEnrollInCourse.Date = aStudentEnrollViewModel.Date;
+
+        bool flag = aUnitOfWork.Repository<StudentEnrollInCourse>().InsertModel(aStudentEnrollInCourse);
+        aUnitOfWork.Save();
+
+      }
+
+      public void SaveResult(StudentResultViewModel aStudentResultViewModel)
+      {
+       Result aResult=new Result();
+        aResult.StudentId = aStudentResultViewModel.StudentId;
+        aResult.CourseId = aStudentResultViewModel.CourseId;
+        aResult.Grade = aStudentResultViewModel.Grade;
+
+        bool flag = aUnitOfWork.Repository<Result>().InsertModel(aResult);
+      }
 
       public IEnumerable<Student> GetAllStudent()
       {
