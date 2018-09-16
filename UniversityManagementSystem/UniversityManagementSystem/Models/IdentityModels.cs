@@ -2,6 +2,8 @@
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNet.Identity.EntityFramework;
 using UniversityManagementSystem.Models.EntityModel;
+using System.Reflection.Emit;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace UniversityManagementSystem.Models
 {
@@ -27,5 +29,17 @@ namespace UniversityManagementSystem.Models
 
         public DbSet<StudentEnrollInCourse> StideStudentEnrollInCourses { get; set; }
         public DbSet<Result> Results { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+           // modelBuilder.Entity<AllocateClassRoom>().HasRequired(c => c.Department).WithMany().WillCascadeOnDelete(false);
+           //modelBuilder.Entity<Student>().HasRequired(c => c.Department).WithMany().WillCascadeOnDelete(false);
+           // modelBuilder.Entity<Course>().HasRequired(c => c.Department).WithMany().WillCascadeOnDelete(false);
+           // modelBuilder.Entity<CourseAssignTeacher>().HasRequired(c => c.Department).WithMany().WillCascadeOnDelete(false);
+           // modelBuilder.Entity<AllocateClassRoom>().HasRequired(c => c.Department).WithMany().WillCascadeOnDelete(false);
+
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
     }
 }

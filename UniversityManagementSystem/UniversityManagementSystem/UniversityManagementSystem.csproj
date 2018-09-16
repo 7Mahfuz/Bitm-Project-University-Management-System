@@ -160,12 +160,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BLL\AllocateManager.cs" />
     <Compile Include="BLL\CourseAssignToTeacherManager.cs" />
     <Compile Include="BLL\CourseManager.cs" />
     <Compile Include="BLL\DepartmentManager.cs" />
     <Compile Include="BLL\SemesterManager.cs" />
     <Compile Include="BLL\StudentManager.cs" />
     <Compile Include="BLL\TeacherManager.cs" />
+    <Compile Include="Controllers\AllocateController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\CourseOfTeacherController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -194,6 +196,10 @@
     <Compile Include="Migrations\201809142045179_Four.Designer.cs">
       <DependentUpon>201809142045179_Four.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809160739411_Five.cs" />
+    <Compile Include="Migrations\201809160739411_Five.Designer.cs">
+      <DependentUpon>201809160739411_Five.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModel\AllocateClassRoom.cs" />
     <Compile Include="Models\EntityModel\CourseAssignTeacher.cs" />
@@ -208,6 +214,7 @@
     <Compile Include="Models\EntityModel\TeacherDesignation.cs" />
     <Compile Include="Models\EntityModel\Student.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ViewModel\AllocateClassRoomViewModel.cs" />
     <Compile Include="Models\ViewModel\AssignedCourseListViewModel.cs" />
     <Compile Include="Models\ViewModel\CourseTeacherViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentEnrollViewModel.cs" />
@@ -273,6 +280,7 @@
     <Content Include="Views\Student\EnrollInCourse.cshtml" />
     <Content Include="Views\Student\SaveResult.cshtml" />
     <Content Include="Views\Student\ViewStudentResult.cshtml" />
+    <Content Include="Views\Allocate\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809142045179_Four.resx">
       <DependentUpon>201809142045179_Four.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809160739411_Five.resx">
+      <DependentUpon>201809160739411_Five.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

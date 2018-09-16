@@ -9,7 +9,9 @@ namespace UniversityManagementSystem.Models
     public class Department
     { [Key]
         public int Id { get; set; }
-    public string Code { get; set; }
-    public string Name { get; set; }
+        [Required]
+        public string Code { get; set; }
+        [Required]
+        public string Name { get; set; }
     }
 }
