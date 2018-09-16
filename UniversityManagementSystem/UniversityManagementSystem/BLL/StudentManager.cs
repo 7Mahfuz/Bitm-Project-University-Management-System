@@ -79,6 +79,7 @@ namespace UniversityManagementSystem.BLL
         aStudentEnrollInCourse.StudentId = aStudentEnrollViewModel.StudentId;
         aStudentEnrollInCourse.CourseId = aStudentEnrollViewModel.CourseId;
         aStudentEnrollInCourse.Date = aStudentEnrollViewModel.Date;
+          aStudentEnrollInCourse.IsAcTive = true;
 
         bool flag = aUnitOfWork.Repository<StudentEnrollInCourse>().InsertModel(aStudentEnrollInCourse);
         aUnitOfWork.Save();

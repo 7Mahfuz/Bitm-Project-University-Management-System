@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - PUBG UNIVERSITY</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -20,15 +20,61 @@
                 @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Add Department", "Add", "Department")</li>
-                    <li>@Html.ActionLink("Add Course", "Create", "Course")</li>
-                    <li>@Html.ActionLink("Add Teacher", "Create", "Teacher")</li>
-                    <li>@Html.ActionLink("Assing Course", "Create", "CourseOfTeacher")</li>
-                    <li>@Html.ActionLink("Add Student", "Create", "Student")</li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Department</button>
+                            <div class="dropdown-content">
+                                @Html.ActionLink("Add Department", "Add", "Department")
+                                @Html.ActionLink("View All Department", "Index", "Department")
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Course</button>
+                            <div class="dropdown-content">
+                                @Html.ActionLink("Add Course", "Create", "Course")
+                                @Html.ActionLink("Assign Course To Teacher", "Create", "CourseOfTeacher")
+                                @Html.ActionLink("Enroll Student To Courses", "EnrollInCourse", "Student")
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Teacher</button>
+                            <div class="dropdown-content">
+                    @Html.ActionLink("Add Teacher", "Create", "Teacher")
+                   @Html.ActionLink("Assing Course To Teacher", "Create", "CourseOfTeacher")
+                                @Html.ActionLink("See All Assigned List", "AssignedCourseListShow", "CourseOfTeacher")
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Student</button>
+                            <div class="dropdown-content">
+                               @Html.ActionLink("Add Student", "Create", "Student")
+                                @Html.ActionLink("Enroll Student To Courses", "EnrollInCourse", "Student")
+                                @Html.ActionLink("Save Student's Result", "SaveResult", "Student")
+                                @Html.ActionLink("See A Student Result", "ViewStudentResult", "Student")
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Allocate</button>
+                            <div class="dropdown-content">
+                               @Html.ActionLink("Allocate Room", "Create", "Allocate")
+                            </div>
+                        </div>
+                    </li>
+                    
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @*@Html.Partial("_LoginPartial")*@
             </div>
         </div>
     </div>
@@ -36,7 +82,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - PUBG UNIVERSITY</p>
         </footer>
     </div>
 
