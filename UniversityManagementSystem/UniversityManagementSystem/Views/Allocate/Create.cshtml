@@ -38,7 +38,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RoomId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.RoomId, ViewBag.RoomList as SelectList, "-- Select Room --", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.RoomId, ViewBag.RoomList as SelectList, "-- Select RoomNumber --", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.RoomId)
             </div>
         </div>
@@ -68,10 +68,16 @@
                 @Html.ValidationMessageFor(model => model.To)
             </div>
         </div>
-        text-box single-line
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
+                @{
+    if (ViewBag.message != null)
+    {
+            <span style="color:green">@ViewBag.message</span>
+    }
+                }
             </div>
         </div>
     </div>

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
+using Microsoft.Ajax.Utilities;
 using UniversityManagementSystem.DAL;
 using UniversityManagementSystem.Models;
 using UniversityManagementSystem.Models.EntityModel;
+using UniversityManagementSystem.Models.ViewModel;
 
 namespace UniversityManagementSystem.BLL
 {
@@ -23,43 +26,81 @@ namespace UniversityManagementSystem.BLL
             this.aUnitOfWork = _uow;
         }
 
-        public void SaveAllocate(AllocateClassRoomViewModel aAllocateClassRoomViewModel)
+        public string SaveAllocate(AllocateClassRoomViewModel aAllocateClassRoomViewModel)
         {
-            AllocateClassRoom aAllocateClassRoom=new AllocateClassRoom();
-            aAllocateClassRoom.IsAcTive = true;
-            aAllocateClassRoom.RoomId = aAllocateClassRoomViewModel.RoomId;
-            aAllocateClassRoom.CourseId = aAllocateClassRoomViewModel.CourseId;
-            aAllocateClassRoom.DayId = aAllocateClassRoomViewModel.DayId;
-            aAllocateClassRoom.DepartmentId = aAllocateClassRoomViewModel.DepartmentId;
-            aAllocateClassRoom.From = aAllocateClassRoomViewModel.From;
-          
-            aAllocateClassRoom.To = aAllocateClassRoomViewModel.To;
-           
+            string msg=CheckTime(aAllocateClassRoomViewModel);
 
-            bool flag = aUnitOfWork.Repository<AllocateClassRoom>().InsertModel(aAllocateClassRoom);
-            aUnitOfWork.Save();
+            if (msg == "Full")
+            {
+                return "Class room is Full in this Time Zone";
+            }
+
+            if (msg == "Ok")
+            {
+                AllocateClassRoom aAllocateClassRoom = new AllocateClassRoom();
+                aAllocateClassRoom.IsAcTive = true;
+                aAllocateClassRoom.RoomId = aAllocateClassRoomViewModel.RoomId;
+                aAllocateClassRoom.CourseId = aAllocateClassRoomViewModel.CourseId;
+                aAllocateClassRoom.DayId = aAllocateClassRoomViewModel.DayId;
+                aAllocateClassRoom.DepartmentId = aAllocateClassRoomViewModel.DepartmentId;
+                aAllocateClassRoom.From = aAllocateClassRoomViewModel.From;
+
+                aAllocateClassRoom.To = aAllocateClassRoomViewModel.To;
+
+
+                bool flag = aUnitOfWork.Repository<AllocateClassRoom>().InsertModel(aAllocateClassRoom);
+                aUnitOfWork.Save();
+                return "Class Room allocated Succesfully";
+            }
+            return "Class Room allocation failed";
         }
 
-        public void CheckTime(AllocateClassRoomViewModel aAllocateClassRoomViewModel)
+        public string CheckTime(AllocateClassRoomViewModel aAllocateClassRoomViewModel)
         {
-            AllocateClassRoomViewModel tempAllocate = aAllocateClassRoomViewModel;
-            IEnumerable<AllocateClassRoom> listInRooms =
+            AllocateClassRoomViewModel newAllocate = aAllocateClassRoomViewModel;
+            IEnumerable<AllocateClassRoom> list =
                 aUnitOfWork.Repository<AllocateClassRoom>()
-                    .GetList(x => x.RoomId == aAllocateClassRoomViewModel.RoomId && x.IsAcTive == true);
+                    .GetList(x => x.RoomId == newAllocate.RoomId && x.DayId==newAllocate.DayId && x.IsAcTive == true);
 
-            if (listInRooms.Count() == 0)
+            List<AllocateClassRoom> listInRooms =new List<AllocateClassRoom>();
+            foreach (AllocateClassRoom room in list)
             {
-                
+                listInRooms.Add(room);
             }
 
-
-
-
-
-            foreach (AllocateClassRoom allocate in listInRooms)
+            if (newAllocate.From> newAllocate.To)
             {
-                
+                return "InValid";
             }
+            
+            if (listInRooms.Count()==0)
+            {
+                return "Ok";
+            }
+            string msg = "Ok";
+            foreach (AllocateClassRoom oldAllocate in listInRooms)
+            {
+                if (newAllocate.From>oldAllocate.From && newAllocate.To<oldAllocate.To)
+                {
+                    msg = "Full";
+                }
+                else if (newAllocate.From < oldAllocate.From && newAllocate.To > oldAllocate.To)
+                {
+                    msg = "Full";
+                }
+                else if(newAllocate.From>oldAllocate.From && newAllocate.From<oldAllocate.To)
+                {
+                    msg = "Full";  
+                }
+                else if(newAllocate.From<oldAllocate.From && newAllocate.To>oldAllocate.From && newAllocate.To<oldAllocate.To)
+                {
+                    msg = "Full"; 
+                }
+
+
+
+            }
+            return msg;
         }
 
         public void UnAllocateAllCourses()
@@ -100,5 +141,40 @@ namespace UniversityManagementSystem.BLL
             }
             aUnitOfWork.Save();
         }
+
+        public List<AllocateRoomViewModel> GetAllocateRoomList(int departmentId)
+        {
+            IEnumerable<AllocateClassRoom> allocatedRoom =
+                aUnitOfWork.Repository<AllocateClassRoom>().GetList(x => x.DepartmentId == departmentId);
+
+            List<AllocateClassRoom> tempList = allocatedRoom.DistinctBy(x => x.DepartmentId).ToList();
+
+            List<AllocateRoomViewModel>newList=new List<AllocateRoomViewModel>();
+
+            foreach (AllocateClassRoom allocateClassRoom in tempList)
+            {
+                AllocateRoomViewModel newAllocateRoom=new AllocateRoomViewModel();
+                Course aCourse = aUnitOfWork.Repository<Course>().GetModelById(allocateClassRoom.CourseId);
+                newAllocateRoom.Code = aCourse.Code;
+                newAllocateRoom.Name = aCourse.Name;
+                string info = "";
+                foreach (AllocateClassRoom classRoom in allocatedRoom)
+                {
+                    if (classRoom.CourseId == aCourse.Id)
+                    {
+                        Room aRoom = aUnitOfWork.Repository<Room>().GetModelById(classRoom.RoomId);
+                        Day aDay = aUnitOfWork.Repository<Day>().GetModelById(classRoom.DayId);
+                        info += "R.No : " + aRoom.RoomNumber + ", " + aDay.ShortName + ", " + classRoom.From.ToString("hh:mm tt") + " - " +
+                                classRoom.To.ToString("hh:mm tt") + "<br>";
+                    }
+
+                }
+                newAllocateRoom.Info = info;
+                newList.Add(newAllocateRoom);
+            }
+            return newList;
+        }
+
     }
 }
+

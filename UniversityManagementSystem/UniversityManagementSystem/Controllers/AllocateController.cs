@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using UniversityManagementSystem.BLL;
 using UniversityManagementSystem.Models;
+using UniversityManagementSystem.Models.ViewModel;
 
 namespace UniversityManagementSystem.Controllers
 {
@@ -50,25 +51,22 @@ namespace UniversityManagementSystem.Controllers
             ViewBag.CourseList = new SelectList(courses, "Id", "Code");
 
             IEnumerable<Room> rooms = aRoomManager.GetAllRooms();
-            ViewBag.RoomList = new SelectList(rooms, "Id", "Name");
+            ViewBag.RoomList = new SelectList(rooms, "Id", "RoomNumber");
 
             IEnumerable<Day> days = aDayManager.GetAllDays();
             ViewBag.DayList = new SelectList(days, "Id", "Name");
 
             try
             {
-                aAllocateManager.SaveAllocate(aAllocateClassRoomViewModel);
+              string msg=  aAllocateManager.SaveAllocate(aAllocateClassRoomViewModel);
 
-                DateTime from = aAllocateClassRoomViewModel.From;
-                int fromHour = from.Hour, fromMinute = from.Minute;
-                TimeSpan sDateTime = from.TimeOfDay;
+                if (msg == "Class room is Full in this Time Zone")
+                {
+                    ViewBag.message = msg;
+                    return View();
+                }
 
-                DateTime localTime =aAllocateClassRoomViewModel.From;
-
-                // 24 hour format -- use 'H' or 'HH'
-                string timeString24Hour = localTime.ToString("HH:mm", CultureInfo.CurrentCulture);
-
-                // TODO: Add insert logic here
+                ViewBag.message = msg;
                 ModelState.Clear();
                 return View(new AllocateClassRoomViewModel());
             }
@@ -80,14 +78,15 @@ namespace UniversityManagementSystem.Controllers
 
         public ActionResult ShowRoomAllocation()
         {
+            IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
+            ViewBag.DeptList = new SelectList(departments, "Id", "Name");
             return View();
         }
 
-        public JsonResult GetRoomInfo(int departmentId)
+        public JsonResult GetRoomInfoList(int departmentId)
         {
-
-
-            return Json(0, JsonRequestBehavior.AllowGet);
+            IEnumerable<AllocateRoomViewModel> list = aAllocateManager.GetAllocateRoomList(departmentId);
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
 
