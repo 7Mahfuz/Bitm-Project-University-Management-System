@@ -221,6 +221,7 @@
     <Compile Include="Models\EntityModel\Student.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModel\AllocateClassRoomViewModel.cs" />
+    <Compile Include="Models\ViewModel\AllocateRoomViewModel.cs" />
     <Compile Include="Models\ViewModel\AssignedCourseListViewModel.cs" />
     <Compile Include="Models\ViewModel\CourseTeacherViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentEnrollViewModel.cs" />
@@ -290,6 +291,7 @@
     <Content Include="Views\Allocate\Create.cshtml" />
     <Content Include="Views\Allocate\UnAllocateCourses.cshtml" />
     <Content Include="Views\Allocate\UnAllocateRooms.cshtml" />
+    <Content Include="Views\Allocate\ShowRoomAllocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

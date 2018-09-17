@@ -87,3 +87,19 @@
     @Scripts.Render("~/bundles/jqueryval")
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#DepartmentId").change(function() {
+            $("#CourseId").empty();
+            $.get("/Allocate/GetCourseList", { StudentId: $("#StudentId").val() }, function(data) {
+                $("#CourseId").append("<option value='0'> --Select Course --</option");
+                $.each(data, function(index, row) {
+                    $("#CourseId").append("<option value='" + row.Id + "'>" + row.Code + "</option");
+
+                });
+
+            });
+        });
+    });
+        </script>

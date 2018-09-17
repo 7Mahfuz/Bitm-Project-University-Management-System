@@ -23,7 +23,7 @@ namespace UniversityManagementSystem.Controllers
             IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
             ViewBag.DeptList = new SelectList(departments, "Id", "Name");
 
-            IEnumerable<Course> courses = aCourseManager.GetAllCourses();
+            IEnumerable<Course> courses = new List<Course>();
             ViewBag.CourseList = new SelectList(courses, "Id", "Code");
 
             IEnumerable<Room> rooms =aRoomManager.GetAllRooms();
@@ -34,14 +34,18 @@ namespace UniversityManagementSystem.Controllers
             return View();
         }
 
-        // POST: Allocate/Create
+        public JsonResult GetCourseList(int departmentId)
+        {
+            IEnumerable<Course> coursesList = aCourseManager.GetCourseByDeptId(departmentId);
+            return Json(coursesList, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public ActionResult Create(AllocateClassRoomViewModel aAllocateClassRoomViewModel)
         {
             IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
             ViewBag.DeptList = new SelectList(departments, "Id", "Name");
 
-            IEnumerable<Course> courses = aCourseManager.GetAllCourses();
+            IEnumerable<Course> courses = new List<Course>();
             ViewBag.CourseList = new SelectList(courses, "Id", "Code");
 
             IEnumerable<Room> rooms = aRoomManager.GetAllRooms();
@@ -67,6 +71,19 @@ namespace UniversityManagementSystem.Controllers
                 return View();
             }
         }
+
+        public ActionResult ShowRoomAllocation()
+        {
+            return View();
+        }
+
+        public JsonResult GetRoomInfo(int departmentId)
+        {
+
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult UnAllocateCourses()
         {
