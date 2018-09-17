@@ -202,9 +202,9 @@
     <Compile Include="Migrations\201809160739411_Five.Designer.cs">
       <DependentUpon>201809160739411_Five.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809161623564_Six.cs" />
-    <Compile Include="Migrations\201809161623564_Six.Designer.cs">
-      <DependentUpon>201809161623564_Six.cs</DependentUpon>
+    <Compile Include="Migrations\201809170054126_Six.cs" />
+    <Compile Include="Migrations\201809170054126_Six.Designer.cs">
+      <DependentUpon>201809170054126_Six.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModel\AllocateClassRoom.cs" />
@@ -315,8 +315,8 @@
     <EmbeddedResource Include="Migrations\201809160739411_Five.resx">
       <DependentUpon>201809160739411_Five.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809161623564_Six.resx">
-      <DependentUpon>201809161623564_Six.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809170054126_Six.resx">
+      <DependentUpon>201809170054126_Six.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

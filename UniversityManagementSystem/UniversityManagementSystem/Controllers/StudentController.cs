@@ -39,16 +39,6 @@ namespace UniversityManagementSystem.Controllers
             }
             catch (DbEntityValidationException e)
             {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
                 return View();
             }
 
@@ -67,7 +57,7 @@ namespace UniversityManagementSystem.Controllers
 
       public JsonResult GetCourseList(int studentId)
       {
-        IEnumerable<Course> courses = aStudentManager.GetCourseListByStudentId(studentId);
+        IEnumerable<Course> courses = aStudentManager.GetCourseListByStudentIdForJson(studentId);
         return Json(courses, JsonRequestBehavior.AllowGet);
       }
       public JsonResult GetStudent(int studentId)
@@ -84,10 +74,10 @@ namespace UniversityManagementSystem.Controllers
 
         List<Course> courses = new List<Course>();
         ViewBag.courseList = new SelectList(courses, "Id", "Name");
-        aStudentManager.EnrollStudentSave(aStudentEnrollViewModel);
-
+        string msg=aStudentManager.EnrollStudentSave(aStudentEnrollViewModel);
+          ViewBag.message = msg;
         ModelState.Clear();
-        return View(new StudentResultViewModel());
+        return View(new StudentEnrollViewModel());
       }
 
 
@@ -109,9 +99,10 @@ namespace UniversityManagementSystem.Controllers
         List<Course> courses = new List<Course>();
         ViewBag.courseList = new SelectList(courses, "Id", "Name");
 
-
-
-        return View();
+          string msg = aStudentManager.SaveResult(aStudentResultViewModel);
+          ViewBag.message = msg;
+            ModelState.Clear();
+        return View(new StudentResultViewModel());
       }
 
 
@@ -123,6 +114,10 @@ namespace UniversityManagementSystem.Controllers
 
         return View();
       }
-      
+        public JsonResult GetResultList(int studentId)
+        {
+            IEnumerable<ViewResultViewModel> resultList = aStudentManager.GetResultListByStudentId(studentId);
+            return Json(resultList, JsonRequestBehavior.AllowGet);
+        }
     }
 }

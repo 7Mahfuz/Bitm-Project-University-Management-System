@@ -83,8 +83,9 @@ namespace UniversityManagementSystem.DAL
         {
             bool flag = true;
             try
-            {// _DbSet.Attach(model);
-                _DbSet.AddOrUpdate(model);
+            { //_DbSet.Attach(model);
+            //    _DbSet.AddOrUpdate(model);
+                context.Entry(model).State=EntityState.Modified;
 
             }
             catch { flag = false; };

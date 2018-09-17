@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @readonly = "true", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email)
+                <input type="email" name="Email" class="form-control" id="Email" readonly="true" />
                 @Html.ValidationMessageFor(model => model.Email)
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DepartmentName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DepartmentName)
+                @Html.TextBoxFor(model => model.DepartmentName, new { @readonly = "true", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DepartmentName)
             </div>
         </div>
@@ -89,40 +89,38 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }
+<script src="~/Scripts/jquery-1.10.2.js"></script>
 <script>
-    $(document).ready(function () {
-       
-            //For student's TExt boxes
-            $("#StudentId").change(function () {
-                $.get("/Student/GetStudent", { StudentId: $("#StudentId").val() }, function (data) {
-                    $('#Name').val('');
-                    $('#Email').val('');
-                    $('#DepartmentName').val('');
-                    // $('#CreditToTake').val(data);
-                    $('#Name').val(data.Name);
-                    $('#Email').val(data.Email);
-                    $('#DepartmentName').val(data.RegNO);
+    $(document).ready(function() {
 
-                });
+        //For student's TExt boxes
+        $("#StudentId").change(function() {
+            $.get("/Student/GetStudent", { StudentId: $("#StudentId").val() }, function(data) {
+                $('#Name').val('');
+                $('#Email').val('');
+                $('#DepartmentName').val('');
+                // $('#CreditToTake').val(data);
+                $('#Name').val(data.Name);
+                $('#Email').val(data.Email);
+                $('#DepartmentName').val(data.RegNo);
 
             });
 
-        //For list show
-            $("#StudentId").change(function () {
+
+//For list show
+            $.get("/Student/GetResultList", { studentId: $("#StudentId").val() }, function(data) {
+                var row;
                 $("#table1").empty();
-                $.get("/Student/GetResultList", { studentId: $("#StudentId").val() }, function (data) {
-                    var row;
-                    row += "<tr><th>" + "Course Code" + "</th><th>" + "Name" + "</th><th>" + "Grade" + "</th>";
-                    $.each(data, function (i, item) {
+                row += "<tr><th>" + "Course Code" + "</th><th>" + "Name" + "</th><th>" + "Grade" + "</th>";
+                $.each(data, function(i, item) {
 
-                        row += "<tr><td>" + item.Code + "</td><td>" + item.Name + "</td><td>" + item.Grade + "</td>";
-                    });
-                    $("#table1").append(row);
+                    row += "<tr><td>" + item.Code + "</td><td>" + item.Name + "</td><td>" + item.Grade + "</td>";
                 });
-
+                $("#table1").append(row);
             });
-
 
         });
-   
+
+
+    });
 </script>

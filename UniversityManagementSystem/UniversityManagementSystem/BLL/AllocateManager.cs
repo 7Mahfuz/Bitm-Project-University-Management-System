@@ -30,9 +30,9 @@ namespace UniversityManagementSystem.BLL
             aAllocateClassRoom.DayId = aAllocateClassRoomViewModel.DayId;
             aAllocateClassRoom.DepartmentId = aAllocateClassRoomViewModel.DepartmentId;
             aAllocateClassRoom.From = aAllocateClassRoomViewModel.From;
-            aAllocateClassRoom.TimeFrom = aAllocateClassRoomViewModel.TimeFrom;
+            aAllocateClassRoom.AmPmFr = aAllocateClassRoomViewModel.TimeFrom;
             aAllocateClassRoom.To = aAllocateClassRoomViewModel.To;
-            aAllocateClassRoom.TimeTo = aAllocateClassRoomViewModel.TimeTo;
+            aAllocateClassRoom.AmPmTo = aAllocateClassRoomViewModel.TimeTo;
 
             bool flag = aUnitOfWork.Repository<AllocateClassRoom>().InsertModel(aAllocateClassRoom);
             aUnitOfWork.Save();

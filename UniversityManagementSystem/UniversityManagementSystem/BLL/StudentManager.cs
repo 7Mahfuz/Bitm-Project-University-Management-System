@@ -28,7 +28,7 @@ namespace UniversityManagementSystem.BLL
         {
             Student aStudent=new Student();
             aStudent.Name = aStudentViewModel.Name;
-            aStudent.Email = aStudentViewModel.ContactNo;
+            aStudent.Email = aStudentViewModel.Email;
             aStudent.ContactNo = aStudentViewModel.ContactNo;
             aStudent.Date = aStudentViewModel.Date;
             aStudent.Address = aStudentViewModel.Address;
@@ -73,8 +73,13 @@ namespace UniversityManagementSystem.BLL
         }
 
 
-      public void EnrollStudentSave(StudentEnrollViewModel aStudentEnrollViewModel)
+      public string EnrollStudentSave(StudentEnrollViewModel aStudentEnrollViewModel)
       {
+
+          if (CheckExist(aStudentEnrollViewModel))
+          {
+              return "This Student already have this Course";
+          }
         StudentEnrollInCourse aStudentEnrollInCourse=new StudentEnrollInCourse();
         aStudentEnrollInCourse.StudentId = aStudentEnrollViewModel.StudentId;
         aStudentEnrollInCourse.CourseId = aStudentEnrollViewModel.CourseId;
@@ -83,29 +88,95 @@ namespace UniversityManagementSystem.BLL
 
         bool flag = aUnitOfWork.Repository<StudentEnrollInCourse>().InsertModel(aStudentEnrollInCourse);
         aUnitOfWork.Save();
-
+          if (flag)
+          {
+              return "Course Succsefully Assigned";
+          }
+          else
+          {
+              return "Course Assign faailed <br> Try again";
+          }
       }
 
-      public void SaveResult(StudentResultViewModel aStudentResultViewModel)
+        public bool CheckExist(StudentEnrollViewModel aStudentEnrollViewModel)
+        {
+            StudentEnrollInCourse aCourse =
+                aUnitOfWork.Repository<StudentEnrollInCourse>()
+                    .GetModel(
+                        x =>
+                            x.StudentId == aStudentEnrollViewModel.StudentId &&
+                            x.CourseId == aStudentEnrollViewModel.CourseId);
+
+            if (aCourse == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+      public string SaveResult(StudentResultViewModel aStudentResultViewModel)
       {
        Result aResult=new Result();
         aResult.StudentId = aStudentResultViewModel.StudentId;
         aResult.CourseId = aStudentResultViewModel.CourseId;
         aResult.Grade = aStudentResultViewModel.Grade;
+          aResult.IsActive = true;
+          if (CheckExist(aStudentResultViewModel))
+          {
+              Result aResult2 =
+                  aUnitOfWork.Repository<Result>()
+                      .GetModel(
+                          x => x.StudentId == aResult.StudentId && x.CourseId == aResult.CourseId && x.IsActive == true);
 
-        bool flag = aUnitOfWork.Repository<Result>().InsertModel(aResult);
+              aResult2.Grade = aResult.Grade;
+
+              bool flag = aUnitOfWork.Repository<Result>().UpdateModel(aResult2);
+                aUnitOfWork.Save();
+                if(flag)return "Resullt Updated";
+          }
+
+        bool flag2 = aUnitOfWork.Repository<Result>().InsertModel(aResult);
+            aUnitOfWork.Save();
+          if (flag2) return "Result Saved Succesfully";
+          else return "Result saving failed";
+
       }
 
+        public bool CheckExist(StudentResultViewModel aStudentResultViewModel)
+        {
+            Result aResult =
+                aUnitOfWork.Repository<Result>()
+                    .GetModel(
+                        x =>
+                            x.StudentId == aStudentResultViewModel.StudentId &&
+                            x.CourseId == aStudentResultViewModel.CourseId && x.IsActive==true);
+
+            if (aResult == null) return false;
+            else return true;
+        }
       public IEnumerable<Student> GetAllStudent()
       {
         IEnumerable<Student> students = aUnitOfWork.Repository<Student>().GetList();
         return students;
       }
 
-      public IEnumerable<Course> GetCourseListByStudentId(int studentId)
+      public IEnumerable<Course> GetCourseListByStudentIdForJson(int studentId)
       {
         Student aStudent = aUnitOfWork.Repository<Student>().GetModelById(studentId);
-        IEnumerable<Course> courses = aCourseManager.GetCourseByDeptId(aStudent.DepartmentId);
+          IEnumerable<StudentEnrollInCourse> studentCourse =
+              aUnitOfWork.Repository<StudentEnrollInCourse>()
+                  .GetList(x => x.StudentId == studentId && x.IsAcTive == true);
+            List<Course>courses=new List<Course>();
+          foreach (var temp in studentCourse)
+          {
+              Course aCourse=new Course();
+              aCourse = aUnitOfWork.Repository<Course>().GetModelById(temp.CourseId);
+                courses.Add(aCourse);
+          }
+
         return courses;
       }
 
@@ -123,7 +194,35 @@ namespace UniversityManagementSystem.BLL
         return aStudent;
       }
 
+        public IEnumerable<ViewResultViewModel> GetResultListByStudentId(int studentId)
+        {
+            IEnumerable<StudentEnrollInCourse> studentCourse =
+                aUnitOfWork.Repository<StudentEnrollInCourse>()
+                    .GetList(x => x.StudentId == studentId && x.IsAcTive == true);
+            List<ViewResultViewModel>resultList=new List<ViewResultViewModel>();
+            foreach (var temp in studentCourse)
+            {
+                ViewResultViewModel aViewModel=new ViewResultViewModel();
+                Result aResult =
+                    aUnitOfWork.Repository<Result>()
+                        .GetModel(x => x.StudentId == studentId && x.CourseId == temp.CourseId);
 
+                Course aCourse = aCourseManager.GetACourse(temp.CourseId);
+                aViewModel.Code = aCourse.Code;
+                aViewModel.Name = aCourse.Name;
+                if (aResult == null)
+                {
+                    aViewModel.Grade = "Not Graded Yet";
+                }
+                else
+                {
+                    aViewModel.Grade = aResult.Grade;
+                }
+
+                resultList.Add(aViewModel);
+            }
+            return resultList;
+        } 
 
     }
 }
