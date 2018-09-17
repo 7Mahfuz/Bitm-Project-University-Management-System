@@ -18,12 +18,12 @@ namespace UniversityManagementSystem.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
         public DateTime From { get; set; }
 
-    public string TimeFrom { get; set; }
+   
 
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
         public DateTime To { get; set; }
 
-    public string TimeTo { get; set; }
+    
     }
 }

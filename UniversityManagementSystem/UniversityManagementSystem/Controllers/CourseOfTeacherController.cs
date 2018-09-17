@@ -109,7 +109,7 @@ namespace UniversityManagementSystem.Controllers
             aTeacherCredit.TeacherCreditTo = Convert.ToDouble(aTeacher.CreditToBeTaken);
             if (CourseAssignTeacher.Count() == 0)
             {
-                aTeacherCredit.RemCredit = 0;
+                aTeacherCredit.RemCredit = aTeacher.CreditToBeTaken;
             }
             else
             {

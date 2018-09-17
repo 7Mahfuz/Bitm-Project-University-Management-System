@@ -166,18 +166,10 @@ namespace UniversityManagementSystem.BLL
       public IEnumerable<Course> GetCourseListByStudentIdForJson(int studentId)
       {
         Student aStudent = aUnitOfWork.Repository<Student>().GetModelById(studentId);
-          IEnumerable<StudentEnrollInCourse> studentCourse =
-              aUnitOfWork.Repository<StudentEnrollInCourse>()
-                  .GetList(x => x.StudentId == studentId && x.IsAcTive == true);
-            List<Course>courses=new List<Course>();
-          foreach (var temp in studentCourse)
-          {
-              Course aCourse=new Course();
-              aCourse = aUnitOfWork.Repository<Course>().GetModelById(temp.CourseId);
-                courses.Add(aCourse);
-          }
-
-        return courses;
+          IEnumerable<Course> studentCourse =
+              aUnitOfWork.Repository<Course>().GetList(x => x.DepartmentId == aStudent.DepartmentId);
+             
+        return studentCourse;
       }
 
       public Student GetAStudent(int studentId)

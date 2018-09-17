@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -58,9 +59,14 @@ namespace UniversityManagementSystem.Controllers
             {
                 aAllocateManager.SaveAllocate(aAllocateClassRoomViewModel);
 
-                //DateTime from = aAllocateClassRoomViewModel.From;
-                //int fromHour = from.Hour, fromMinute = from.Minute;
-                //TimeSpan sDateTime = from.TimeOfDay;
+                DateTime from = aAllocateClassRoomViewModel.From;
+                int fromHour = from.Hour, fromMinute = from.Minute;
+                TimeSpan sDateTime = from.TimeOfDay;
+
+                DateTime localTime =aAllocateClassRoomViewModel.From;
+
+                // 24 hour format -- use 'H' or 'HH'
+                string timeString24Hour = localTime.ToString("HH:mm", CultureInfo.CurrentCulture);
 
                 // TODO: Add insert logic here
                 ModelState.Clear();

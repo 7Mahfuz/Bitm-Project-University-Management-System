@@ -55,8 +55,7 @@
             @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input  data-val="true" @*data-val-required="The From field is required."*@ id="From" name="From" type="time" value="" />
-                @Html.RadioButtonFor(model => model.TimeFrom, "AM") AM
-                @Html.RadioButtonFor(model => model.TimeFrom, "PM") PM
+               
                 @Html.ValidationMessageFor(model => model.From)
             </div>
         </div>
@@ -65,8 +64,7 @@
             @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                <input  data-val="true" @*data-val-required="The From field is required."*@ id="To" name="To" type="time" value="" />
-                @Html.RadioButtonFor(model => model.TimeTo, "AM") AM
-                @Html.RadioButtonFor(model => model.TimeTo, "PM") PM
+               
                 @Html.ValidationMessageFor(model => model.To)
             </div>
         </div>
@@ -92,7 +90,7 @@
     $(document).ready(function() {
         $("#DepartmentId").change(function() {
             $("#CourseId").empty();
-            $.get("/Allocate/GetCourseList", { StudentId: $("#StudentId").val() }, function(data) {
+            $.get("/Allocate/GetCourseList", { departmentId: $("#DepartmentId").val() }, function(data) {
                 $("#CourseId").append("<option value='0'> --Select Course --</option");
                 $.each(data, function(index, row) {
                     $("#CourseId").append("<option value='" + row.Id + "'>" + row.Code + "</option");

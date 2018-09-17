@@ -32,9 +32,9 @@ namespace UniversityManagementSystem.BLL
             aAllocateClassRoom.DayId = aAllocateClassRoomViewModel.DayId;
             aAllocateClassRoom.DepartmentId = aAllocateClassRoomViewModel.DepartmentId;
             aAllocateClassRoom.From = aAllocateClassRoomViewModel.From;
-            aAllocateClassRoom.AmPmFr = aAllocateClassRoomViewModel.TimeFrom;
+          
             aAllocateClassRoom.To = aAllocateClassRoomViewModel.To;
-            aAllocateClassRoom.AmPmTo = aAllocateClassRoomViewModel.TimeTo;
+           
 
             bool flag = aUnitOfWork.Repository<AllocateClassRoom>().InsertModel(aAllocateClassRoom);
             aUnitOfWork.Save();
@@ -46,6 +46,15 @@ namespace UniversityManagementSystem.BLL
             IEnumerable<AllocateClassRoom> listInRooms =
                 aUnitOfWork.Repository<AllocateClassRoom>()
                     .GetList(x => x.RoomId == aAllocateClassRoomViewModel.RoomId && x.IsAcTive == true);
+
+            if (listInRooms.Count() == 0)
+            {
+                
+            }
+
+
+
+
 
             foreach (AllocateClassRoom allocate in listInRooms)
             {

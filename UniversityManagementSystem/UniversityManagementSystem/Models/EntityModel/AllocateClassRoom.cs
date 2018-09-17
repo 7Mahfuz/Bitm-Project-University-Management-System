@@ -30,9 +30,9 @@ namespace UniversityManagementSystem.Models.EntityModel
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
 
-        public string AmPmFr { get; set; }
+       
         public DateTime To { get; set; }
-        public string AmPmTo { get; set; }
+       
         public bool IsAcTive { get; set; }
 
         public virtual Department Department { get; set; }

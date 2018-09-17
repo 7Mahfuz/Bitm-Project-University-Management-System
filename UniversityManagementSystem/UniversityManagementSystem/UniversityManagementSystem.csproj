@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201809170054126_Six.Designer.cs">
       <DependentUpon>201809170054126_Six.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809170817181_Seven.cs" />
+    <Compile Include="Migrations\201809170817181_Seven.Designer.cs">
+      <DependentUpon>201809170817181_Seven.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModel\AllocateClassRoom.cs" />
     <Compile Include="Models\EntityModel\CourseAssignTeacher.cs" />
@@ -321,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809170054126_Six.resx">
       <DependentUpon>201809170054126_Six.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809170817181_Seven.resx">
+      <DependentUpon>201809170817181_Seven.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
