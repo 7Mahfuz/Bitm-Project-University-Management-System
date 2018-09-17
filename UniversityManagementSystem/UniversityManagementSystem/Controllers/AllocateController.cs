@@ -16,13 +16,7 @@ namespace UniversityManagementSystem.Controllers
         RoomManager aRoomManager=new RoomManager();
         AllocateManager aAllocateManager=new AllocateManager();
 
-        // GET: Allocate/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Allocate/Create
+        
         public ActionResult Create()
 
         {
@@ -74,48 +68,23 @@ namespace UniversityManagementSystem.Controllers
             }
         }
 
-        // GET: Allocate/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult UnAllocateCourses()
         {
             return View();
         }
-
-        // POST: Allocate/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult UnAllocateAllCourses()
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            aAllocateManager.UnAllocateAllCourses();
+            return RedirectToAction("UnAllocateCourses");
         }
 
-        // GET: Allocate/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult UnAllocateRooms()
         {
             return View();
         }
-
-        // POST: Allocate/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        public ActionResult UnAllocateAllRooms()
+        {aAllocateManager.UnAllocateAllRooms();
+            return RedirectToAction("UnAllocateRooms");
         }
     }
 }

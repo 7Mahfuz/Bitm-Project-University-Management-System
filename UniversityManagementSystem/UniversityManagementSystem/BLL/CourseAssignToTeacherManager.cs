@@ -32,6 +32,7 @@ namespace UniversityManagementSystem.BLL
             aCourseAssignTeacher.DepartmentId = aCourseTeacherViewModel.DepartmentId;
             aCourseAssignTeacher.CourseId = aCourseTeacherViewModel.CourseId;
             aCourseAssignTeacher.CreditTaken = aCourseTeacherViewModel.CourseCredit;
+            aCourseAssignTeacher.IsActive = true;
                 bool flag = aUnitOfWork.Repository<CourseAssignTeacher>().InsertModel(aCourseAssignTeacher);
                 aUnitOfWork.Save();
                 
@@ -49,20 +50,20 @@ namespace UniversityManagementSystem.BLL
         public IEnumerable<CourseAssignTeacher> GetListByTeacherId(int teacherId)
         {
             IEnumerable<CourseAssignTeacher> assignList =
-                aUnitOfWork.Repository<CourseAssignTeacher>().GetList(x => x.TeacherId == teacherId);
+                aUnitOfWork.Repository<CourseAssignTeacher>().GetList(x => x.TeacherId == teacherId && x.IsActive==true);
             return assignList;
         }
 
         public IEnumerable<CourseAssignTeacher> GetListByDepartmentId(int deptId)
         {
             IEnumerable<CourseAssignTeacher> assignList =
-                aUnitOfWork.Repository<CourseAssignTeacher>().GetList(x => x.DepartmentId == deptId);
+                aUnitOfWork.Repository<CourseAssignTeacher>().GetList(x => x.DepartmentId == deptId && x.IsActive==true);
             return assignList;
         }
         public CourseAssignTeacher GetAssignDataByCourseId(int courseId)
         {
             CourseAssignTeacher aCourseAssignTeacher =
-                aUnitOfWork.Repository<CourseAssignTeacher>().GetModel(x=>x.CourseId==courseId);
+                aUnitOfWork.Repository<CourseAssignTeacher>().GetModel(x=>x.CourseId==courseId && x.IsActive==true);
             return aCourseAssignTeacher;
         }
 

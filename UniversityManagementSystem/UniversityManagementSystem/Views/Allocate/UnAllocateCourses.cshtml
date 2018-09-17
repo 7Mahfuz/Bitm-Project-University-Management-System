@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "UnAllocateCourses";
+}
+
+<style>
+    input.MyButton {
+        width: 900px;
+        padding: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 150%;
+        background: #3366cc;
+        color: #fff;
+        border: 1px solid #3366cc;
+        border-radius: 10px;
+    }
+
+        input.MyButton:hover {
+            color: #ffff00;
+            background: #000;
+            border: 1px solid #fff;
+        }
+</style>
+
+<input class="MyButton"  type="button" value="Click To Un Allocate All courses"  onclick="window.location.href='/Allocate/UnAllocateAllCourses'" />
+

@@ -69,6 +69,8 @@
                             <button class="dropbtn">Allocate</button>
                             <div class="dropdown-content">
                                @Html.ActionLink("Allocate Room", "Create", "Allocate")
+                                @Html.ActionLink("Un-Allocate all Rooms", "UnAllocateRooms", "Allocate")
+                                @Html.ActionLink("Un-Allocate all courses", "UnAllocateCourses", "Allocate")
                             </div>
                         </div>
                     </li>

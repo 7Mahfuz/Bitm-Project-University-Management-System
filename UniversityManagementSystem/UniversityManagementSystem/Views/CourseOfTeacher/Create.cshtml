@@ -76,7 +76,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
+                <input type="submit" value="Create" id="Btn" class="btn btn-default" />
                 @{
                     if (ViewBag.message != null)
                     {
@@ -99,6 +99,18 @@
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script>
     $(document).ready(function () {
+        $("#Btn").click(function(event) {
+            var teacherCredit = $("#CreditToTake").val();
+            var remainCredit = $("#RemainingCredit").val();
+            var courseCredit = $("#CourseCredit").val();
+            if ( remainCredit < courseCredit) {
+                var r = confirm("Are you sure you want to submit?");
+                if (r == false) {
+                    return false;
+                }
+            }
+        });
+
         $("#DepartmentId").change(function() {
             $.get("/CourseOfTeacher/GetTeacherList", { DepartmentId: $("#DepartmentId").val() }, function(data) {
                 $("#TeacherId").empty();
