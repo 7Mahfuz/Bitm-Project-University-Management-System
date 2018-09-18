@@ -9,12 +9,16 @@ namespace UniversityManagementSystem.Models
   [Serializable]
   public class StudentEnrollViewModel
   {
-    public int StudentId { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public string DepartmentName { get; set; }
-
-    public int CourseId { get; set; }
+        [Display(Name = "Student")]
+        public int StudentId { get; set; }
+        [Display(Name = "Student Name")]
+        public string Name { get; set; }
+        [Display(Name = "Student's Email")]
+        public string Email { get; set; }
+        [Display(Name = "Department")]
+        public string DepartmentName { get; set; }
+        [Display(Name = "Course")]
+        public int CourseId { get; set; }
         [DataType(DataType.Date)]
     public DateTime Date { get; set; }
 

@@ -27,6 +27,7 @@ namespace UniversityManagementSystem.Models
         public int DepartmentId { get; set; }
         [Required]
         [Display(Name = "Credit to Be Taken")]
+        [Range(0.00, 50.00, ErrorMessage = "Credit must be a Positive number")]
         public double CreditToBeTaken { get; set; }
 
          public virtual Department Department { get; set; }

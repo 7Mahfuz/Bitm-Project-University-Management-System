@@ -4,102 +4,114 @@
     ViewBag.Title = "SaveResult";
 }
 
-<h2>SaveResult</h2>
+<br/><br/>
 
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-9">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>StudentResultViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+            <div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StudentId, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.StudentId, ViewBag.studentList as SelectList, "-- Select Student RegNo --", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.StudentId)
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StudentId, new { @class = "control-label col-md-3" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.StudentId, ViewBag.studentList as SelectList, "-- Select Student RegNo --", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.StudentId)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Name, new { @readonly = "true", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-3" })
+                    <div class="col-md-8">
+                        <input type="email" name="Email" class="form-control" id="Email" readonly="true" />
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DepartmentName, new { @class = "control-label col-md-3" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.DepartmentName, new { @readonly = "true", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DepartmentName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CourseId, new { @class = "control-label col-md-3" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.CourseId, ViewBag.courseList as SelectList, "-- Select Course --", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CourseId)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Grade, new { @class = "control-label col-md-3" })
+                    <div class="col-md-8">
+
+                        @Html.DropDownListFor(model => model.Grade, new List<SelectListItem>
+                        {
+                            new SelectListItem {Text = "-- Select Grade --", Value = "0"},
+                            new SelectListItem {Text = "A+", Value = "A+"},
+                            new SelectListItem {Text = "A", Value = "A"},
+                            new SelectListItem {Text = "A-", Value = "A-"},
+                            new SelectListItem {Text = "B+", Value = "B+"},
+                            new SelectListItem {Text = "B", Value = "B"},
+                            new SelectListItem {Text = "B-", Value = "B-"},
+                            new SelectListItem {Text = "C+", Value = "C+"},
+                            new SelectListItem {Text = "C", Value = "C"},
+                            new SelectListItem {Text = "C-", Value = "C-"},
+                            new SelectListItem {Text = "D+", Value = "D+"},
+                            new SelectListItem {Text = "D", Value = "D"},
+                            new SelectListItem {Text = "D-", Value = "D-"},
+                            new SelectListItem {Text = "F", Value = "F"}
+                        }, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Grade)
+                        <br/>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default btn-success" />
+                                @{
+                                    if (ViewBag.message != null)
+                                    {
+                                        <span id="fade" style="color: green"><font size="4">@ViewBag.message</font></span>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+
+                
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new {@readonly="true", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="email" name="Email" class="form-control" id="Email" readonly="true" />
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DepartmentName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DepartmentName, new {@readonly="true", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DepartmentName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseId, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CourseId, ViewBag.courseList as SelectList, "-- Select Course --", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CourseId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Grade, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-              
-                @Html.DropDownListFor(model=>model.Grade,new List<SelectListItem>
-                {
-                    new SelectListItem{ Text="-- Select Grade --", Value = "0" },
-                   new SelectListItem{ Text="A+", Value = "A+" },
-new SelectListItem{ Text="A", Value = "A" },
-new SelectListItem{ Text="A-", Value = "A-" },
-new SelectListItem{ Text="B+", Value = "B+" },
-new SelectListItem{ Text="B", Value = "B" },
-new SelectListItem{ Text="B-", Value = "B-" },
- new SelectListItem{ Text="C+", Value = "C+" },
-new SelectListItem{ Text="C", Value = "C" },
-new SelectListItem{ Text="C-", Value = "C-" },
-new SelectListItem{ Text="D+", Value = "D+" },
-new SelectListItem{ Text="D", Value = "D" },
-new SelectListItem{ Text="D-", Value = "D-" },
-                    new SelectListItem{ Text="F", Value = "F" }
-                }, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Grade)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
-                @{
-                    if (ViewBag.message != null)
-                    {
-                        <span style="color: green">@ViewBag.message</span>
-                    }
-                }
-            </div>
-        </div>
+                            }
     </div>
-}
-
+</div>
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script type="text/javascript">
+
+      $(document).ready( function() {
+        $('#fade').delay(7000).fadeOut();
+      });
+</script>
 }
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script>

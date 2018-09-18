@@ -4,70 +4,79 @@
     ViewBag.Title = "Add";
 }
 
-<h2>Add</h2>
+<br/><br/><br />
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-9">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Department</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        <div class="form-group">
-            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Code, new { @class = "form-control"  })
-                @{
-                    if (@ViewBag.CodeError !=null)
-                    {
-                         <span style="color: #b94a48">@ViewBag.CodeError</span>
+            <div class="form-horizontal">
                 
-                    }
-                    }
-                    @Html.ValidationMessageFor(model => model.Code)
-                    
+                
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Code, new { @class = "form-control" })
+                        @{
+                            if (@ViewBag.CodeError != null)
+                            {
+                                <span id="fade" style="color: #b94a48">@ViewBag.CodeError</span>
+
+                            }
+                        }
+                        @Html.ValidationMessageFor(model => model.Code)
+
+                    </div>
                 </div>
-        </div>
+                <br/>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                        @{
+                            if (@ViewBag.NameError != null)
+                            {
+                                <span id="fade" style="color: #b94a48">@ViewBag.NameError</span>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                @{
-    if (@ViewBag.NameError != null)
-    {
-            <span style="color: #b94a48">@ViewBag.NameError</span>
+                            }
+                        }
+                        @Html.ValidationMessageFor(model => model.Name)
+                        <br/>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-12">
+                                <input type="submit" value="Save Department" class="btn btn-default btn-success" />
+                                @{
+                                    if (ViewBag.Msg != null)
+                                    {
+                                        <span id="fade" style="color: green"><font size="4">@ViewBag.Msg</font></span>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    }
-                }
-                @Html.ValidationMessageFor(model => model.Name)
+                
+
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-                @{
-    if (ViewBag.Msg != null)
-    {
-            <span style="color:green">@ViewBag.Msg</span>
-    }
-                }
-            </div>
-        </div>
-       
+                            }
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script type="text/javascript">
+
+      $(document).ready( function() {
+        $('#fade').delay(7000).fadeOut();
+      });
+</script>
 }
 
 

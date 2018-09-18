@@ -210,6 +210,10 @@
     <Compile Include="Migrations\201809170817181_Seven.Designer.cs">
       <DependentUpon>201809170817181_Seven.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809171746101_Eight.cs" />
+    <Compile Include="Migrations\201809171746101_Eight.Designer.cs">
+      <DependentUpon>201809171746101_Eight.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModel\AllocateClassRoom.cs" />
     <Compile Include="Models\EntityModel\CourseAssignTeacher.cs" />
@@ -266,22 +270,11 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Department\Index.cshtml" />
     <Content Include="Views\Department\Add.cshtml" />
     <Content Include="Views\Course\Create.cshtml" />
@@ -328,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809170817181_Seven.resx">
       <DependentUpon>201809170817181_Seven.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809171746101_Eight.resx">
+      <DependentUpon>201809171746101_Eight.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

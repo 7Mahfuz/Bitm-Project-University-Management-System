@@ -8,13 +8,18 @@ namespace UniversityManagementSystem.Models
 {[Serializable]
     public class CourseTeacherViewModel
     {[Required]
-    public int DepartmentId { get; set; }
+        [Display(Name = "Department")]
+        public int DepartmentId { get; set; }
         [Required]
-    public int TeacherId { get; set; }
-    public double CreditToTake { get; set; }
-    public double RemainingCredit { get; set; }
+        [Display(Name = "Teacher")]
+        public int TeacherId { get; set; }
+        [Display(Name = "Credit to take")]
+        public double CreditToTake { get; set; }
+        [Display(Name = "Remaning Credit")]
+        public double RemainingCredit { get; set; }
         [Required]
-    public int CourseId { get; set; }
+        [Display(Name = "Course")]
+        public int CourseId { get; set; }
     public string CourseName { get; set; }
     public double CourseCredit { get; set; }
 

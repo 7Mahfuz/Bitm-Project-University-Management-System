@@ -10,6 +10,7 @@ namespace UniversityManagementSystem.Models
     { [Key]
         public int Id { get; set; }
         [Required]
+        [StringLength(7, MinimumLength = 2, ErrorMessage = "Code must between 2 to 7 leters")]
         public string Code { get; set; }
         [Required]
         public string Name { get; set; }

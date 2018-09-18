@@ -8,10 +8,13 @@ namespace UniversityManagementSystem.Models
 {[Serializable]
     public class AllocateClassRoomViewModel
     {
+        [Display(Name = "Department")]
         public int DepartmentId { get; set; }
+        [Display(Name = "Course")]
         public int CourseId { get; set; }
+        [Display(Name = "Room Number")]
         public int RoomId { get; set; }
-
+        [Display(Name = "Day")]
         public int DayId { get; set; }
 
         [DataType(DataType.Time)]

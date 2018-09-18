@@ -5,11 +5,12 @@
 
 <style>
     input.MyButton {
-        width: 900px;
+        width: 20000px;
+        height: 100px;
         padding: 20px;
         cursor: pointer;
         font-weight: bold;
-        font-size: 150%;
+        font-size: 120%;
         background: #3366cc;
         color: #fff;
         border: 1px solid #3366cc;
@@ -22,6 +23,27 @@
             border: 1px solid #fff;
         }
 </style>
+<br /><br /><br /><br /><br /><br />
+<div class="row">
+    <div class="col-md-4"></div>
+    <div >
+        <input class="MyButton" id="Btn" type="button" value="Click To Un Allocate All courses" />
+    </div>
+</div>
 
-<input class="MyButton"  type="button" value="Click To Un Allocate All courses"  onclick="window.location.href='/Allocate/UnAllocateAllCourses'" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#Btn").click(function(event) {
 
+                var r = confirm("Are you sure you want to Un-asssign all Courses ?");
+                if (r == false) {
+                    return false;
+                }
+                if (r == true) {
+                    window.location.href = '/Allocate/UnAllocateAllCourses';
+                }
+
+        });
+    });
+</script>

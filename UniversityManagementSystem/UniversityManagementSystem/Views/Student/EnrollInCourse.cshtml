@@ -4,88 +4,95 @@
     ViewBag.Title = "EnrollInCourse";
     ViewBag.date = DateTime.Now;
 }
+<br/><br/>
+<div class="row">
+    <div class="col-md-2"></div>
+        <div class="col-md-8">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-<h2>EnrollInCourse</h2>
+            <div class="form-horizontal">
 
+                @Html.ValidationSummary(true)
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>StudentEnrollViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StudentId, new {@class = "control-label col-md-3"})
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.StudentId, ViewBag.studentList as SelectList, "-- Select Student RegNo --", new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.StudentId)
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StudentId, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.StudentId, ViewBag.studentList as SelectList, "-- Select Student RegNo --", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.StudentId)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new {@class = "control-label col-md-3"})
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Name, new {@readonly = "true", @class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, new {@class = "control-label col-md-3"})
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Email, new { @class = "form-control" })*@
+                        <input type="email" name="Email" class="form-control" id="Email" readonly="true"/>
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DepartmentName, new {@class = "control-label col-md-3"})
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.DepartmentName, new {@readonly = "true", @class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.DepartmentName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CourseId, new {@class = "control-label col-md-3"})
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.CourseId, ViewBag.courseList as SelectList, "-- Select Course --", new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.CourseId)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Date, new {@class = "control-label col-md-3"})
+                    <div class="col-md-8">
+                        <input class="form-control" data-val="true" data-val-date="The field Date must be a date." data-val-required="The Date field is required." id="Date" name="Date" type="date" value=""/>
+
+                        @Html.ValidationMessageFor(model => model.Date)
+                        <br/>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Enroll" class="btn btn-default btn-success" />
+                                @{
+                                    if (ViewBag.message != null)
+                                    {
+                                        <span id="fade" style="color: green"><font size="4">@ViewBag.message</font></span>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new {@readonly="true", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Email, new { @class = "form-control" })*@
-                <input type="email" name="Email" class="form-control" id="Email" readonly="true"/>
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DepartmentName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DepartmentName, new { @readonly = "true", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DepartmentName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseId, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CourseId, ViewBag.courseList as SelectList, "-- Select Course --", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CourseId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input class="form-control" data-val="true" data-val-date="The field Date must be a date." data-val-required="The Date field is required." id="Date" name="Date" type="date" value="" />
-
-                @Html.ValidationMessageFor(model => model.Date)
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
-                @{
-                    if (ViewBag.message != null)
-                    {
-                        <span style="color: green">@ViewBag.message</span>
-                    }
-                }
-            </div>
-        </div>
+        }
     </div>
-}
-
-<
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script type="text/javascript">
+
+      $(document).ready( function() {
+        $('#fade').delay(7000).fadeOut();
+      });
+</script>
 }
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script>

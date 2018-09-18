@@ -3,86 +3,88 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - PUBG UNIVERSITY</title>
+    <title>@ViewBag.Title PUBG UNIVERSITY</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <div class="dropdown">
-                            <button class="dropbtn">Department</button>
-                            <div class="dropdown-content">
-                                @Html.ActionLink("Add Department", "Add", "Department")
-                                @Html.ActionLink("View All Department", "Index", "Department")
-                            </div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Application name", "Index", "Home", null, new {@class = "navbar-brand"})
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">Department</button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Add Department", "Add", "Department")
+                            @Html.ActionLink("View All Department", "Index", "Department")
                         </div>
-                    </li>
+                    </div>
+                </li>
 
-                    <li>
-                        <div class="dropdown">
-                            <button class="dropbtn">Course</button>
-                            <div class="dropdown-content">
-                                @Html.ActionLink("Add Course", "Create", "Course")
-                                @Html.ActionLink("Assign Course To Teacher", "Create", "CourseOfTeacher")
-                                @Html.ActionLink("Enroll Student To Courses", "EnrollInCourse", "Student")
-                            </div>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">Course</button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Add Course", "Create", "Course")
+                            @Html.ActionLink("Assign Course To Teacher", "Create", "CourseOfTeacher")
+                            @Html.ActionLink("Enroll Student To Courses", "EnrollInCourse", "Student")
                         </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button class="dropbtn">Teacher</button>
-                            <div class="dropdown-content">
-                    @Html.ActionLink("Add Teacher", "Create", "Teacher")
-                   @Html.ActionLink("Assing Course To Teacher", "Create", "CourseOfTeacher")
-                                @Html.ActionLink("See All Assigned List", "AssignedCourseListShow", "CourseOfTeacher")
-                            </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">Teacher</button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Add Teacher", "Create", "Teacher")
+                            @Html.ActionLink("Assing Course To Teacher", "Create", "CourseOfTeacher")
+                            @Html.ActionLink("See All Assigned List", "AssignedCourseListShow", "CourseOfTeacher")
                         </div>
-                    </li>
+                    </div>
+                </li>
 
 
-                    <li>
-                        <div class="dropdown">
-                            <button class="dropbtn">Student</button>
-                            <div class="dropdown-content">
-                               @Html.ActionLink("Add Student", "Create", "Student")
-                                @Html.ActionLink("Enroll Student To Courses", "EnrollInCourse", "Student")
-                                @Html.ActionLink("Save Student's Result", "SaveResult", "Student")
-                                @Html.ActionLink("See A Student Result", "ViewStudentResult", "Student")
-                            </div>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">Student</button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Add Student", "Create", "Student")
+                            @Html.ActionLink("Enroll Student To Courses", "EnrollInCourse", "Student")
+                            @Html.ActionLink("Save Student's Result", "SaveResult", "Student")
+                            @Html.ActionLink("See A Student Result", "ViewStudentResult", "Student")
                         </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button class="dropbtn">Allocate</button>
-                            <div class="dropdown-content">
-                               @Html.ActionLink("Allocate Room", "Create", "Allocate")
-                                @Html.ActionLink("Un-Allocate all Rooms", "UnAllocateRooms", "Allocate")
-                                @Html.ActionLink("Un-Allocate all courses", "UnAllocateCourses", "Allocate")
-                                @Html.ActionLink("See Allocated Rooms", "ShowRoomAllocation", "Allocate")
-                            </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">Allocate</button>
+                        <div class="dropdown-content">
+                            @Html.ActionLink("Allocate Room", "Create", "Allocate")
+                            @Html.ActionLink("Un-Allocate all Rooms", "UnAllocateRooms", "Allocate")
+                            @Html.ActionLink("Un-Allocate all courses", "UnAllocateCourses", "Allocate")
+                            @Html.ActionLink("See Allocated Rooms", "ShowRoomAllocation", "Allocate")
                         </div>
-                    </li>
-                    
-                </ul>
-                @*@Html.Partial("_LoginPartial")*@
-            </div>
+                    </div>
+                </li>
+
+            </ul>
+          
         </div>
     </div>
+</div>
+    <br /><br />
     <div class="container body-content">
         @RenderBody()
+        <br/><br/><br/>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - PUBG UNIVERSITY</p>

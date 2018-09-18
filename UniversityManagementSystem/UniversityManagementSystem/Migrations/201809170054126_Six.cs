@@ -9,7 +9,7 @@ namespace UniversityManagementSystem.Migrations
         {
             AddColumn("dbo.AllocateClassRooms", "AmPmFr", c => c.String(nullable: false));
             AddColumn("dbo.AllocateClassRooms", "AmPmTo", c => c.String());
-            AddColumn("dbo.Results", "IsAcTive", c => c.Boolean(nullable: false));
+           
             
         }
         
@@ -18,7 +18,7 @@ namespace UniversityManagementSystem.Migrations
            
             DropColumn("dbo.AllocateClassRooms", "AmPmTo");
             DropColumn("dbo.AllocateClassRooms", "AmPmFr");
-            DropColumn("dbo.Results", "IsAcTive");
+            
         }
     }
 }

@@ -122,12 +122,16 @@ namespace UniversityManagementSystem.BLL
             }
 
             IEnumerable<Result> results = aUnitOfWork.Repository<Result>().GetList();
-            foreach (Result result in results)
+            if (results.ToList().Count() > 0)
             {
-                result.IsActive = false;
-                aUnitOfWork.Repository<Result>().UpdateModel(result);
-               
+                foreach (Result result in results)
+                {
+                    result.IsActive = false;
+                    aUnitOfWork.Repository<Result>().UpdateModel(result);
+
+                }
             }
+            
             aUnitOfWork.Save();
         }
 
@@ -158,18 +162,32 @@ namespace UniversityManagementSystem.BLL
                 newAllocateRoom.Code = aCourse.Code;
                 newAllocateRoom.Name = aCourse.Name;
                 string info = "";
-                foreach (AllocateClassRoom classRoom in allocatedRoom)
+
+                int a = allocatedRoom.Count(x => x.CourseId == aCourse.Id),b=a;
+                List<AllocateClassRoom> forcourseList = allocatedRoom.Where(x => x.CourseId == aCourse.Id).ToList();
+                foreach (AllocateClassRoom classRoom in forcourseList)
                 {
-                    if (classRoom.CourseId == aCourse.Id)
-                    {
-                        Room aRoom = aUnitOfWork.Repository<Room>().GetModelById(classRoom.RoomId);
+                    b--;
+                    Room aRoom = aUnitOfWork.Repository<Room>().GetModelById(classRoom.RoomId);
                         Day aDay = aUnitOfWork.Repository<Day>().GetModelById(classRoom.DayId);
                         info += "R.No : " + aRoom.RoomNumber + ", " + aDay.ShortName + ", " + classRoom.From.ToString("hh:mm tt") + " - " +
-                                classRoom.To.ToString("hh:mm tt") + "<br>";
+                                classRoom.To.ToString("hh:mm tt") + "";
+                    if (b > 0)
+                    {
+                        info += ";<br/><br>";
                     }
+                   
 
                 }
-                newAllocateRoom.Info = info;
+                if (a == 0)
+                {
+                    newAllocateRoom.Info = "<br/>No Room has been assignned<br/>";
+                }
+                else
+                {
+                    newAllocateRoom.Info = info;
+                }
+                
                 newList.Add(newAllocateRoom);
             }
             return newList;
