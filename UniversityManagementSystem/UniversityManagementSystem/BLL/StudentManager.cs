@@ -34,20 +34,9 @@ namespace UniversityManagementSystem.BLL
             aStudent.Address = aStudentViewModel.Address;
             aStudent.DepartmentId = aStudentViewModel.DepartmentId;
 
-            int numberOfStudent = aUnitOfWork.Repository<Student>().Count(x=>x.DepartmentId==aStudent.DepartmentId && x.Year==DateTime.Now.Year.ToString());
-            string numberStudent = "";
-            if (numberOfStudent < 10)
-            {
-                numberStudent += "00" + (numberOfStudent+1).ToString();
-            }
-            else if (numberOfStudent > 9 && numberOfStudent < 100)
-            {
-                numberStudent += "0" + (numberOfStudent+1).ToString();
-            }
-            else
-            {
-                numberStudent += (numberOfStudent+1).ToString();
-            }
+            int numberOfStudent = aUnitOfWork.Repository<Student>().Count(x=>x.DepartmentId==aStudent.DepartmentId && x.Year==aStudentViewModel.Date.Year.ToString());
+            string numberStudent = (numberOfStudent + 1).ToString("000"); ;
+           
 
             Department aDepartment = aUnitOfWork.Repository<Department>().GetModelById(aStudentViewModel.DepartmentId);
             string reg = "";
@@ -64,15 +53,29 @@ namespace UniversityManagementSystem.BLL
                     break;
                 }
             }
-            reg += "-" + DateTime.Now.Year + "-" + numberStudent;
+            reg += "-" + aStudentViewModel.Date.Year.ToString() + "-" + numberStudent;
             aStudent.RegNo = reg;
-            aStudent.Year = DateTime.Now.Year.ToString();
+            aStudent.Year =aStudentViewModel.Date.Year.ToString();
 
              bool flag = aUnitOfWork.Repository<Student>().InsertModel(aStudent);
             aUnitOfWork.Save();
             return "Saved Succesfully";
         }
 
+
+        public Student GetCurrentStudent()
+        {
+            IEnumerable<Student> students = aUnitOfWork.Repository<Student>().GetList();
+            Student aStudent=new Student();
+            foreach (Student student in students.Reverse())
+            {
+                Department aDepartment = aUnitOfWork.Repository<Department>().GetModelById(student.DepartmentId);
+                aStudent = student;
+                aStudent.Year = aDepartment.Name;
+                break;
+            }
+            return aStudent;
+        }
 
       public string EnrollStudentSave(StudentEnrollViewModel aStudentEnrollViewModel)
       {
@@ -161,7 +164,8 @@ namespace UniversityManagementSystem.BLL
       public IEnumerable<Student> GetAllStudent()
       {
         IEnumerable<Student> students = aUnitOfWork.Repository<Student>().GetList();
-        return students;
+          IEnumerable<Student> sorted = students.OrderBy(x => x.Year);
+        return sorted;
       }
 
       public IEnumerable<Course> GetCourseListByStudentIdForJson(int studentId)

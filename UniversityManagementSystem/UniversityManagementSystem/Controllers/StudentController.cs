@@ -33,6 +33,8 @@ namespace UniversityManagementSystem.Controllers
                 IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
                 ViewBag.DeptList = new SelectList(departments, "Id", "Name");
                 string msg = aStudentManager.Save(aStudentViewModel);
+                Student aStudent = aStudentManager.GetCurrentStudent();
+                ViewBag.Student = aStudent;
                 ViewBag.message = msg;
                 ModelState.Clear();
                 return View(new StudentViewModel());
@@ -43,8 +45,7 @@ namespace UniversityManagementSystem.Controllers
             }
 
         }
-
-
+       
       public ActionResult EnrollInCourse()
       {
         IEnumerable<Student> students = aStudentManager.GetAllStudent();
