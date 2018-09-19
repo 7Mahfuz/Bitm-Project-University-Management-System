@@ -29,6 +29,7 @@ namespace UniversityManagementSystem.Models
 
         public DbSet<StudentEnrollInCourse> StideStudentEnrollInCourses { get; set; }
         public DbSet<Result> Results { get; set; }
+       
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

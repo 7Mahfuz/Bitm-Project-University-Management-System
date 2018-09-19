@@ -34,7 +34,7 @@ namespace UniversityManagementSystem.BLL
             aStudent.Address = aStudentViewModel.Address;
             aStudent.DepartmentId = aStudentViewModel.DepartmentId;
 
-            int numberOfStudent = aUnitOfWork.Repository<Student>().Count(x=>x.DepartmentId==aStudent.DepartmentId);
+            int numberOfStudent = aUnitOfWork.Repository<Student>().Count(x=>x.DepartmentId==aStudent.DepartmentId && x.Year==DateTime.Now.Year.ToString());
             string numberStudent = "";
             if (numberOfStudent < 10)
             {
@@ -66,6 +66,7 @@ namespace UniversityManagementSystem.BLL
             }
             reg += "-" + DateTime.Now.Year + "-" + numberStudent;
             aStudent.RegNo = reg;
+            aStudent.Year = DateTime.Now.Year.ToString();
 
              bool flag = aUnitOfWork.Repository<Student>().InsertModel(aStudent);
             aUnitOfWork.Save();

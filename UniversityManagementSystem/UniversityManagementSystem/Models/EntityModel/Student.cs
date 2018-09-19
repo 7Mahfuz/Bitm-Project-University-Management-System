@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using UniversityManagementSystem.Models.EntityModel;
 
 namespace UniversityManagementSystem.Models
 {
@@ -26,6 +27,8 @@ namespace UniversityManagementSystem.Models
         public DateTime Date { get; set; }
         [Required]
         public int DepartmentId { get; set; }
+
+        public string Year { get; set; }
 
         public virtual Department Department { get; set; }
 
