@@ -36,6 +36,13 @@
                     @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-3" })
                     <div class="col-md-8">
                         @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                        @{
+                            if (@ViewBag.EmailError != null)
+                            {
+                                <span style="color: #b94a48">@ViewBag.EmailError</span>
+
+                            }
+                        }
                         @Html.ValidationMessageFor(model => model.Email)
                     </div>
                 </div>

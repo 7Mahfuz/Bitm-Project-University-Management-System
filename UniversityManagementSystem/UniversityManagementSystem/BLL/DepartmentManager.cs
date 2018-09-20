@@ -39,22 +39,7 @@ namespace UniversityManagementSystem.BLL
                 return "Code is already Exist";
                     
             }
-            if (code ==null)
-            {
-                return "Code can not empyty";
-            }
-            if (code.Length < 2)
-            {
-               return "Code can not less than 2 character";
-            }
-            if (code.Length > 7)
-            {
-                msg = "Code can not more than 7 character";
-            }
-            if (code == "")
-            {
-                return "Code can not empyty";
-            }
+            
             return null;
          }
         public string NameCheck(string name)

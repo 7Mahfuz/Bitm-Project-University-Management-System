@@ -59,7 +59,12 @@ namespace UniversityManagementSystem.Controllers
                     ViewBag.CreditError = creditError;
                     errorStatus = true;
                 }
-
+                string emailError = aTeacherManager.CheckEmail(aTeacher.Email);
+                if (emailError != null)
+                {
+                    ViewBag.EmailError = emailError;
+                    errorStatus = true;
+                }
                 if (errorStatus)
                 {
                     return View(aTeacher);

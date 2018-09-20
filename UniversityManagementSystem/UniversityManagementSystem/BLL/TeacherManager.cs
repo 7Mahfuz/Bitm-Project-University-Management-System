@@ -27,7 +27,15 @@ namespace UniversityManagementSystem.BLL
             return "Saved Succesfully";
         }
 
-
+        public string CheckEmail(string email)
+        {
+            int a = aUnitOfWork.Repository<Teacher>().Count(x => x.Email == email);
+            if (a == 1)
+            {
+                return "Email Already Exist";
+            }
+            return null;
+        }
         public string CheckCredit(double credit)
         {
             if (credit < 0)
