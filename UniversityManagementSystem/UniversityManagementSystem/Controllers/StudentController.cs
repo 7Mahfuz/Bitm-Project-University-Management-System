@@ -14,6 +14,7 @@ namespace UniversityManagementSystem.Controllers
         private DepartmentManager aDepartmentManager = new DepartmentManager();
         private StudentManager aStudentManager = new StudentManager();
         CourseManager aCourseManager=new CourseManager();
+        PDFManager aPdfManager=new PDFManager();
         public ActionResult Create()
         {
             IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
@@ -115,6 +116,13 @@ namespace UniversityManagementSystem.Controllers
 
         return View();
       }
+
+        public ActionResult MakePDF(int studentId)
+        {
+            byte[] aBytes= aPdfManager.MakePDF(studentId);
+            return File(aBytes, "application/pdf");
+
+        }
         public JsonResult GetResultList(int studentId)
         {
             IEnumerable<ViewResultViewModel> resultList = aStudentManager.GetResultListByStudentId(studentId);

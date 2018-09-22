@@ -169,6 +169,7 @@
     <Compile Include="BLL\CourseManager.cs" />
     <Compile Include="BLL\DayManager.cs" />
     <Compile Include="BLL\DepartmentManager.cs" />
+    <Compile Include="BLL\PDFManager.cs" />
     <Compile Include="BLL\RoomManager.cs" />
     <Compile Include="BLL\SemesterManager.cs" />
     <Compile Include="BLL\StudentManager.cs" />
