@@ -24,6 +24,8 @@ namespace UniversityManagementSystem.BLL
 
         public string Save(Course aCourse)
         {
+            aCourse.Name = aCourse.Name.ToUpper();
+            aCourse.Code = aCourse.Code.ToUpper();
             bool flag = aUnitOfWork.Repository<Course>().InsertModel(aCourse);
             aUnitOfWork.Save();
             return "Saved Succesfully";

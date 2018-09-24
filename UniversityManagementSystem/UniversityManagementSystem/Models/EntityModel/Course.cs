@@ -12,12 +12,13 @@ namespace UniversityManagementSystem.Models
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression(@"^[a-zA-Z]+[ a-zA-Z-_]*$", ErrorMessage = "Code must be start with Letter")]
+        [RegularExpression(@"^[a-zA-Z][A-Za-z0-9-]+$", ErrorMessage = "Code must be start with Letter and Only hyphen is acceptable")]
         [StringLength(50, MinimumLength = 5, ErrorMessage = "Code must be at least 5 charcter long")]
         [Display(Name = "Course Code")]
         public string Code { get; set; }
 
         [Required]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Name must be contain only letters")]
         public string Name { get; set; }
 
         [Required]

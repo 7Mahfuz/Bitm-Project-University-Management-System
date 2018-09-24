@@ -22,6 +22,7 @@ namespace UniversityManagementSystem.BLL
 
         public String Save(Teacher aTeacher)
         {
+            aTeacher.Name = aTeacher.Name.ToUpper();
             bool flag = aUnitOfWork.Repository<Teacher>().InsertModel(aTeacher);
             aUnitOfWork.Save();
             return "Saved Succesfully";

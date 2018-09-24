@@ -33,6 +33,21 @@ namespace UniversityManagementSystem.Controllers
             {
                 IEnumerable<Department> departments = aDepartmentManager.GetAllDepartment();
                 ViewBag.DeptList = new SelectList(departments, "Id", "Name");
+
+                bool errorStatus = false;
+                string emailError = aStudentManager.CheckEmail(aStudentViewModel.Email);
+                if (emailError != null)
+                {
+                    ViewBag.EmailError = emailError;
+                    errorStatus = true;
+                }
+
+
+                if (errorStatus == true)
+                {
+                    return View(aStudentViewModel);
+                }
+
                 string msg = aStudentManager.Save(aStudentViewModel);
                 Student aStudent = aStudentManager.GetCurrentStudent();
                 ViewBag.Student = aStudent;
@@ -62,7 +77,12 @@ namespace UniversityManagementSystem.Controllers
         IEnumerable<Course> courses = aStudentManager.GetCourseListByStudentIdForJson(studentId);
         return Json(courses, JsonRequestBehavior.AllowGet);
       }
-      public JsonResult GetStudent(int studentId)
+        public JsonResult GetCourseList2(int studentId)
+        {
+            IEnumerable<Course> courses = aStudentManager.GetCourseList2ByStudentIdForJson(studentId);
+            return Json(courses, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetStudent(int studentId)
       {
         Student aStudent = aStudentManager.GetAStudentWithDeptName(studentId);
         return Json(aStudent, JsonRequestBehavior.AllowGet);

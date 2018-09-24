@@ -149,22 +149,21 @@ namespace UniversityManagementSystem.BLL
         public List<AllocateRoomViewModel> GetAllocateRoomList(int departmentId)
         {
             IEnumerable<AllocateClassRoom> allocatedRoom =
-                aUnitOfWork.Repository<AllocateClassRoom>().GetList(x => x.DepartmentId == departmentId);
-
-            List<AllocateClassRoom> tempList = allocatedRoom.DistinctBy(x => x.DepartmentId).ToList();
+                aUnitOfWork.Repository<AllocateClassRoom>().GetList(x => x.DepartmentId == departmentId && x.IsAcTive==true);
+           // List<AllocateClassRoom> tempList = allocatedRoom.DistinctBy(x => x.CourseId).ToList();
+            List<Course> tempList = aUnitOfWork.Repository<Course>().GetList(x => x.DepartmentId == departmentId).ToList();
 
             List<AllocateRoomViewModel>newList=new List<AllocateRoomViewModel>();
 
-            foreach (AllocateClassRoom allocateClassRoom in tempList)
+            foreach (Course allocateClassRoom in tempList)
             {
                 AllocateRoomViewModel newAllocateRoom=new AllocateRoomViewModel();
-                Course aCourse = aUnitOfWork.Repository<Course>().GetModelById(allocateClassRoom.CourseId);
-                newAllocateRoom.Code = aCourse.Code;
-                newAllocateRoom.Name = aCourse.Name;
+                newAllocateRoom.Code = allocateClassRoom.Code;
+                newAllocateRoom.Name = allocateClassRoom.Name;
                 string info = "";
 
-                int a = allocatedRoom.Count(x => x.CourseId == aCourse.Id),b=a;
-                List<AllocateClassRoom> forcourseList = allocatedRoom.Where(x => x.CourseId == aCourse.Id).ToList();
+                int a = allocatedRoom.Count(x => x.CourseId == allocateClassRoom.Id && x.IsAcTive==true),b=a;
+                List<AllocateClassRoom> forcourseList = allocatedRoom.Where(x => x.CourseId == allocateClassRoom.Id).ToList();
                 foreach (AllocateClassRoom classRoom in forcourseList)
                 {
                     b--;
@@ -174,14 +173,14 @@ namespace UniversityManagementSystem.BLL
                                 classRoom.To.ToString("hh:mm tt") + "";
                     if (b > 0)
                     {
-                        info += ";<br/><br>";
+                        info += ";<br/>";
                     }
                    
 
                 }
                 if (a == 0)
                 {
-                    newAllocateRoom.Info = "<br/>No Room has been assignned<br/>";
+                    newAllocateRoom.Info = "Not Scheduled Yet";
                 }
                 else
                 {

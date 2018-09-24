@@ -5,122 +5,131 @@
     ViewBag.Title = "Create";
 }
 
-<br/><br/>
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-7">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+<br/><br/><br /><br />
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-7">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-                
-                @Html.ValidationSummary(true)
+                <div class="form-horizontal">
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
-                    <div class="col-md-8">
-                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Name)
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-3" })
-                    <div class="col-md-8">
-                        <input type="email" name="Email" class="form-control" id="Email" />
-                        @Html.ValidationMessageFor(model => model.Email)
-                    </div>
-                </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-3" })
+                        <div class="col-md-8">
+                            <input type="email" name="Email" class="form-control" id="Email"/>
+                            @{
+                                if (@ViewBag.EmailError != null)
+                                {
+                                    <span style="color: #b94a48">@ViewBag.EmailError</span>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ContactNo, new { @class = "control-label col-md-3" })
-                    <div class="col-md-8">
-                        @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.ContactNo)
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-3" })
-                    <div class="col-md-8">
-                        @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Address)
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-3" })
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })*@
-                        <input type="date" name="Date" id="Date" class="form-control" value="" />
-                        @Html.ValidationMessageFor(model => model.Date)
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DepartmentId, new { @class = "control-label col-md-3" })
-                    <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.DepartmentId, ViewBag.DeptList as SelectList, "-- Select Department --", new { @class = "form-control" })
-
-                        @Html.ValidationMessageFor(model => model.DepartmentId)
-                        <br/>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Add" class="btn btn-default btn-success" />
-                                @{
-                                    if (ViewBag.message != null)
-                                    {
-                                        <span id="fade" style="color: green"><font size="4">@ViewBag.message</font></span>
-                                    }
                                 }
+                            }
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ContactNo, new { @class = "control-label col-md-3" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ContactNo)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-3" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-3" })
+                        <div class="col-md-8">
+                            @*@Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })*@
+                            <input type="date" name="Date" id="Date" class="form-control" value="" />
+                            @Html.ValidationMessageFor(model => model.Date)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DepartmentId, new { @class = "control-label col-md-3" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.DepartmentId, ViewBag.DeptList as SelectList, "-- Select Department --", new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.DepartmentId)
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Add" class="btn btn-default btn-success" />
+                                    @{
+                                        if (ViewBag.message != null)
+                                        {
+                                            <span id="fade" style="color: green"><font size="4">@ViewBag.message</font></span>
+                                        }
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
+                                        }
+        </div>
+        <div class="col-md-3">
+            <div id="fuu">
+                @{
+                    if (ViewBag.Student != null)
+                    {
+                        <label>Name :</label> <label>  @ViewBag.Student.Name</label><br />
+                        <label>Registration No :</label> <label>  @ViewBag.Student.RegNo</label><br />
+                        <label>Department :</label> <label>  @ViewBag.Student.Year</label><br />
+                        <label>Email :</label> <label>  @ViewBag.Student.Email</label><br />
+                        <label>Contact No :</label> <label>  @ViewBag.Student.ContactNo</label><br />
+                        <label>Address :</label> <label>  @ViewBag.Student.Address</label><br />
 
-                
-            </div>
-        }
-    </div>
-    <div class="col-md-3">
-        <div id="fuu">
-            @{
-                if (ViewBag.Student != null)
-                {
-                    <label>Name :</label> <label>  @ViewBag.Student.Name</label><br />
-                    <label>Registration No :</label> <label>  @ViewBag.Student.RegNo</label><br />
-                    <label>Department :</label> <label>  @ViewBag.Student.Year</label><br />
-                    <label>Email :</label> <label>  @ViewBag.Student.Email</label><br />
-                    <label>Contact No :</label> <label>  @ViewBag.Student.ContactNo</label><br />
-                    <label>Address :</label> <label>  @ViewBag.Student.Address</label><br />
-
+                    }
                 }
-            }
 
 
+
+            </div>
 
         </div>
-
     </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('#fuu').hide();
+                var test = '@ViewBag.message';
+                if (test == "Saved Succesfully") {
+                    $('#fuu').toggle();
+                }
+
+                $('#fade').delay(7000).fadeOut();
+                $('#fuu').delay(30000).fadeOut();
+            });
+        </script>
+    }
 </div>
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-
-    <script type="text/javascript">
-
-        $(document).ready(function() {
-            $('#fuu').hide();
-            var test = '@ViewBag.message';
-            if (test == "Saved Succesfully") {
-                $('#fuu').toggle();
-            }
-
-            $('#fade').delay(7000).fadeOut();
-            $('#fuu').delay(40000).fadeOut();
-        });
-    </script>
-}

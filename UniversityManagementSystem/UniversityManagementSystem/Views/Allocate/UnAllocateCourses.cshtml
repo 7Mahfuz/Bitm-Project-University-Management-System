@@ -23,18 +23,19 @@
             border: 1px solid #fff;
         }
 </style>
-<br /><br /><br /><br /><br /><br />
-<div class="row">
-    <div class="col-md-4"></div>
-    <div >
-        <input class="MyButton" id="Btn" type="button" value="Click To Un Allocate All courses" />
+<br/><br/><br/><br/><br/><br/><br /><br />
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div>
+            <input class="MyButton" id="Btn" type="button" value="Click To Un Allocate All courses" />
+        </div>
     </div>
-</div>
 
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#Btn").click(function(event) {
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Btn").click(function (event) {
 
                 var r = confirm("Are you sure you want to Un-asssign all Courses ?");
                 if (r == false) {
@@ -44,6 +45,7 @@
                     window.location.href = '/Allocate/UnAllocateAllCourses';
                 }
 
+            });
         });
-    });
-</script>
+    </script>
+</div>

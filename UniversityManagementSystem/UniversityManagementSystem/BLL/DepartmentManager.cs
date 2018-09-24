@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using iTextSharp.text.pdf.fonts.cmaps;
 using UniversityManagementSystem.DAL;
 using UniversityManagementSystem.Models;
 
@@ -22,7 +23,8 @@ namespace UniversityManagementSystem.BLL
 
         public string Save(Department aDepartment)
         {
-            
+            aDepartment.Code = aDepartment.Code.ToUpper();
+            aDepartment.Name = aDepartment.Name.ToUpper();
                 bool flag = aUnitOfWork.Repository<Department>().InsertModel(aDepartment);
                 aUnitOfWork.Save();
                 return "Department Saved";

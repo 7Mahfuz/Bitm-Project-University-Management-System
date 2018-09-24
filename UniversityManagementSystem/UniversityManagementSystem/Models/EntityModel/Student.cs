@@ -20,6 +20,7 @@ namespace UniversityManagementSystem.Models
         public string RegNo { get; set; }
         [Display(Name = "Contact Number")]
         [Required]
+        [RegularExpression(@"^[0-9]*$", ErrorMessage = "Use only Digits")]
         public string ContactNo { get; set; }
         public string Address { get; set; }
         [Required]

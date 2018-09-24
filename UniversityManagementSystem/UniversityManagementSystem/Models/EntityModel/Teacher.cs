@@ -18,6 +18,7 @@ namespace UniversityManagementSystem.Models
         public string Email { get; set; }
         [Required]
         [Display(Name = "Contact Number")]
+        [RegularExpression(@"^[0-9]*$", ErrorMessage = "Use only Digits")]
         public string ContactNo { get; set; }
         [Required]
         [Display(Name = "Designation")]
@@ -27,7 +28,7 @@ namespace UniversityManagementSystem.Models
         public int DepartmentId { get; set; }
         [Required]
         [Display(Name = "Credit to Be Taken")]
-        [Range(0.00, 50.00, ErrorMessage = "Credit must be a Positive number")]
+        [Range(0,100, ErrorMessage = "Credit must be a Positive number")]
         public double CreditToBeTaken { get; set; }
 
          public virtual Department Department { get; set; }

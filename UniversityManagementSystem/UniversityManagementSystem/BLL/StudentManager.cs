@@ -61,7 +61,15 @@ namespace UniversityManagementSystem.BLL
             aUnitOfWork.Save();
             return "Saved Succesfully";
         }
-
+        public string CheckEmail(string email)
+        {
+            int a = aUnitOfWork.Repository<Student>().Count(x => x.Email == email);
+            if (a == 1)
+            {
+                return "Email Already Exist";
+            }
+            return null;
+        }
 
         public Student GetCurrentStudent()
         {
@@ -176,8 +184,21 @@ namespace UniversityManagementSystem.BLL
              
         return studentCourse;
       }
-
-      public Student GetAStudent(int studentId)
+        public IEnumerable<Course> GetCourseList2ByStudentIdForJson(int studentId)
+        {
+            IEnumerable<StudentEnrollInCourse> enroll =
+                aUnitOfWork.Repository<StudentEnrollInCourse>()
+                    .GetList(x => x.StudentId == studentId && x.IsAcTive == true);
+            List<Course>courses=new List<Course>();
+            foreach (StudentEnrollInCourse Enroll in enroll)
+            {
+                Course aCourse=new Course();
+                aCourse = aUnitOfWork.Repository<Course>().GetModelById(Enroll.CourseId);
+                courses.Add(aCourse);
+            }
+            return courses;
+        }
+        public Student GetAStudent(int studentId)
       {
         Student aStudent = aUnitOfWork.Repository<Student>().GetModelById(studentId);
         return aStudent;
