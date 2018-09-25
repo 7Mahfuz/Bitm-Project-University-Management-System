@@ -35,6 +35,7 @@ namespace UniversityManagementSystem.BLL
          {
             int x = 0;
             string msg = "";
+            code = code.ToUpper();
             x = aUnitOfWork.Repository<Department>().Count(a => a.Code == code);
             if (x > 0)
             {
@@ -47,6 +48,7 @@ namespace UniversityManagementSystem.BLL
         public string NameCheck(string name)
         {
             int x = 0;
+            name = name.ToUpper();
             bool flag = false;
             x = aUnitOfWork.Repository<Department>().Count(a => a.Name == name);
             if (x > 0)

@@ -111,7 +111,7 @@
                 var teacherCredit = $("#CreditToTake").val();
                 var remainCredit = $("#RemainingCredit").val();
                 var courseCredit = $("#CourseCredit").val();
-                if (remainCredit < courseCredit) {
+                if (parseInt(remainCredit) < parseInt(courseCredit)) {
                     var r = confirm("Are you sure you want to submit?");
                     if (r == false) {
                         return false;

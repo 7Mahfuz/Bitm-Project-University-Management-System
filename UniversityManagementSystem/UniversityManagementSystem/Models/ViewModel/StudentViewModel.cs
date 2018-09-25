@@ -10,14 +10,18 @@ namespace UniversityManagementSystem.Models
     {
         
         public string Name { get; set; }
+        [Required]
         public string Email { get; set; }
         [Display(Name = "Contact Number")]
         [Required]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "Use only Digits")]
         public string ContactNo { get; set; }
+        [Required]
         public string Address { get; set; }
+        [Required]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
+        [Required]
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
     }

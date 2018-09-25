@@ -19,6 +19,7 @@ namespace UniversityManagementSystem.Models
         public string DepartmentName { get; set; }
         [Display(Name = "Course")]
         public int CourseId { get; set; }
+        [Required]
         [DataType(DataType.Date)]
     public DateTime Date { get; set; }
 

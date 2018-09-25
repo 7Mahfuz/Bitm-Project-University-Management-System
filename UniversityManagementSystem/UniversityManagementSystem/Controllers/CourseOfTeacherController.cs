@@ -142,7 +142,7 @@ namespace UniversityManagementSystem.Controllers
 
             foreach (var list in coursesList)
             {
-                CourseAssignTeacher assign = assingList.FirstOrDefault(x => x.CourseId == list.Id);
+                CourseAssignTeacher assign = assingList.FirstOrDefault(x => x.CourseId == list.Id && x.IsActive==true);
                 if (assign == null)
                 { courses.Add(list); }
             }

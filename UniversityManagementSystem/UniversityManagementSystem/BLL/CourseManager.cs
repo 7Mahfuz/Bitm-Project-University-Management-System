@@ -34,6 +34,7 @@ namespace UniversityManagementSystem.BLL
         public string CheckCode(string code)
         {
             int x = 0;
+            code.ToUpper();
             string msg = "";
             x = aUnitOfWork.Repository<Course>().Count(a => a.Code == code);
             if (x > 0)
@@ -41,15 +42,7 @@ namespace UniversityManagementSystem.BLL
                 return "Code is already Exist";
 
             }
-            if (code == null)
-            {
-                return "Code can not empyty";
-            }
-           
-            if (code.Length <5)
-            {
-                return "Code must be at least 5 character";
-            }
+            
            
             return null;
         }
@@ -57,16 +50,14 @@ namespace UniversityManagementSystem.BLL
         public string CheckName(string name)
         {
             int x = 0;
+            name = name.ToUpper();
             bool flag = false;
             x = aUnitOfWork.Repository<Course>().Count(a => a.Name == name);
             if (x > 0)
             {
                 return "Name already Exist";
             }
-            if (name == null)
-            {
-                return "Name can not empyty";
-            }
+            
             return null;
         }
 

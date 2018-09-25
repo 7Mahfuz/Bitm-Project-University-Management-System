@@ -117,7 +117,7 @@ namespace UniversityManagementSystem.BLL
                     .GetModel(
                         x =>
                             x.StudentId == aStudentEnrollViewModel.StudentId &&
-                            x.CourseId == aStudentEnrollViewModel.CourseId);
+                            x.CourseId == aStudentEnrollViewModel.CourseId && x.IsAcTive==true);
 
             if (aCourse == null)
             {
@@ -223,7 +223,7 @@ namespace UniversityManagementSystem.BLL
                 ViewResultViewModel aViewModel=new ViewResultViewModel();
                 Result aResult =
                     aUnitOfWork.Repository<Result>()
-                        .GetModel(x => x.StudentId == studentId && x.CourseId == temp.CourseId);
+                        .GetModel(x => x.StudentId == studentId && x.CourseId == temp.CourseId && x.IsActive==true);
 
                 Course aCourse = aCourseManager.GetACourse(temp.CourseId);
                 aViewModel.Code = aCourse.Code;
