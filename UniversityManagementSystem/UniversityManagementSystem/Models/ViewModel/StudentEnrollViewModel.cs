@@ -9,6 +9,7 @@ namespace UniversityManagementSystem.Models
   [Serializable]
   public class StudentEnrollViewModel
   {
+        [Required]
         [Display(Name = "Student")]
         public int StudentId { get; set; }
         [Display(Name = "Student Name")]
@@ -17,6 +18,7 @@ namespace UniversityManagementSystem.Models
         public string Email { get; set; }
         [Display(Name = "Department")]
         public string DepartmentName { get; set; }
+        [Required]
         [Display(Name = "Course")]
         public int CourseId { get; set; }
         [Required]

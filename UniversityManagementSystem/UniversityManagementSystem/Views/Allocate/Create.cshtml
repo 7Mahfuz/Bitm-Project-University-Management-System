@@ -55,7 +55,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-8">
-                            <input data-val="true" @*data-val-required="The From field is required."*@ id="From" name="From" type="time" value="" class="form-control" />
+                            <input data-val="true" @*data-val-required="The From field is required."*@ id="From" name="From" type="time" value="" required="true" class="form-control" />
 
                             @Html.ValidationMessageFor(model => model.From)
                         </div>
@@ -64,7 +64,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-8">
-                            <input data-val="true" @*data-val-required="The From field is required."*@ id="To" name="To" type="time" value="" class="form-control" />
+                            <input data-val="true" @*data-val-required="The From field is required."*@ id="To" name="To" type="time" value="" required="true" class="form-control" />
 
                             @Html.ValidationMessageFor(model => model.To)
                             <br />

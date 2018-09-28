@@ -30,7 +30,8 @@ namespace UniversityManagementSystem.BLL
             aStudent.Name = aStudentViewModel.Name;
             aStudent.Email = aStudentViewModel.Email;
             aStudent.ContactNo = aStudentViewModel.ContactNo;
-            aStudent.Date = aStudentViewModel.Date;
+            string tempDate = aStudentViewModel.Date.ToString("yyyy-MM-dd HH:mm:ss");
+            aStudent.Date = tempDate;
             aStudent.Address = aStudentViewModel.Address;
             aStudent.DepartmentId = aStudentViewModel.DepartmentId;
 
@@ -90,19 +91,20 @@ namespace UniversityManagementSystem.BLL
 
           if (CheckExist(aStudentEnrollViewModel))
           {
-              return "This Student already have this Course";
+              return "Exist";
           }
         StudentEnrollInCourse aStudentEnrollInCourse=new StudentEnrollInCourse();
         aStudentEnrollInCourse.StudentId = aStudentEnrollViewModel.StudentId;
         aStudentEnrollInCourse.CourseId = aStudentEnrollViewModel.CourseId;
-        aStudentEnrollInCourse.Date = aStudentEnrollViewModel.Date;
+            string tempDate = aStudentEnrollViewModel.Date.ToString("yyyy-MM-dd HH:mm:ss");
+          aStudentEnrollInCourse.Date = tempDate;
           aStudentEnrollInCourse.IsAcTive = true;
 
         bool flag = aUnitOfWork.Repository<StudentEnrollInCourse>().InsertModel(aStudentEnrollInCourse);
         aUnitOfWork.Save();
           if (flag)
           {
-              return "Course Succsefully Assigned";
+              return "Saved";
           }
           else
           {

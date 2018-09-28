@@ -34,7 +34,7 @@ namespace UniversityManagementSystem.BLL
         public string CheckCode(string code)
         {
             int x = 0;
-            code.ToUpper();
+            code=code.ToUpper();
             string msg = "";
             x = aUnitOfWork.Repository<Course>().Count(a => a.Code == code);
             if (x > 0)

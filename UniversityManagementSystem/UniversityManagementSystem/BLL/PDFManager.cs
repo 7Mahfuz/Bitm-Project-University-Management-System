@@ -62,10 +62,10 @@ namespace UniversityManagementSystem.BLL
         public void ReportHeader(int studentid)
         {
 
-            fontSyle = FontFactory.GetFont("Tahoma", 5f, 1);
+            fontSyle = FontFactory.GetFont("Tahoma", 8f, 1);
             _pdfPCell = new PdfPCell(new Phrase("Date : "+DateTime.Today.ToString("d")+"\n", fontSyle));
             _pdfPCell.Colspan = _totalColumn;
-            _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            _pdfPCell.HorizontalAlignment = Element.ALIGN_RIGHT;
             _pdfPCell.Border = 0;
             _pdfPCell.BackgroundColor = BaseColor.WHITE;
             _pdfPCell.ExtraParagraphSpace = 0;

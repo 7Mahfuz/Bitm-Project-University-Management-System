@@ -15,7 +15,7 @@ namespace UniversityManagementSystem.Models
         [Required]
         [Display(Name = "Course Code")]
         public int CourseId { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public bool IsAcTive { get; set; }
 

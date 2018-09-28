@@ -11,6 +11,7 @@ namespace UniversityManagementSystem.Models
     {[Key]
         public int Id { get; set; }
         [Required]
+        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Name must be contain only letters")]
         public string Name { get; set; }
         [Required]
         [EmailAddress]
@@ -25,7 +26,7 @@ namespace UniversityManagementSystem.Models
         public string Address { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         [Required]
         public int DepartmentId { get; set; }
 

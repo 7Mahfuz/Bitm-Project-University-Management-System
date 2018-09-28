@@ -18,7 +18,7 @@ namespace UniversityManagementSystem.Models
         public string Code { get; set; }
 
         [Required]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Name must be contain only letters")]
+        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Name must be contain only letters")]
         public string Name { get; set; }
 
         [Required]

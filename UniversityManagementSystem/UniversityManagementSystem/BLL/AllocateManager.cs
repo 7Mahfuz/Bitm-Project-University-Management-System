@@ -43,32 +43,27 @@ namespace UniversityManagementSystem.BLL
                 aAllocateClassRoom.CourseId = aAllocateClassRoomViewModel.CourseId;
                 aAllocateClassRoom.DayId = aAllocateClassRoomViewModel.DayId;
                 aAllocateClassRoom.DepartmentId = aAllocateClassRoomViewModel.DepartmentId;
-                aAllocateClassRoom.From = aAllocateClassRoomViewModel.From;
-
-                aAllocateClassRoom.To = aAllocateClassRoomViewModel.To;
+                string tempDate = aAllocateClassRoomViewModel.From.ToString("yyyy-MM-dd HH:mm:ss");
+                aAllocateClassRoom.From = tempDate;
+                tempDate = aAllocateClassRoomViewModel.To.ToString("yyyy-MM-dd HH:mm:ss");
+                aAllocateClassRoom.To = tempDate;
 
 
                 bool flag = aUnitOfWork.Repository<AllocateClassRoom>().InsertModel(aAllocateClassRoom);
                 aUnitOfWork.Save();
                 return "Class Room allocated Succesfully";
             }
-            return "Class Room allocation failed";
+            return "Class Room allocation failed, try some valid time";
         }
 
         public string CheckTime(AllocateClassRoomViewModel aAllocateClassRoomViewModel)
         {
             AllocateClassRoomViewModel newAllocate = aAllocateClassRoomViewModel;
-            IEnumerable<AllocateClassRoom> list =
+            IEnumerable<AllocateClassRoom> listInRooms =
                 aUnitOfWork.Repository<AllocateClassRoom>()
-                    .GetList(x => x.RoomId == newAllocate.RoomId && x.DayId==newAllocate.DayId && x.IsAcTive == true);
+                    .GetList(x => x.RoomId == newAllocate.RoomId && x.DayId==newAllocate.DayId && x.IsAcTive == true).ToList();
 
-            List<AllocateClassRoom> listInRooms =new List<AllocateClassRoom>();
-            foreach (AllocateClassRoom room in list)
-            {
-                listInRooms.Add(room);
-            }
-
-            if (newAllocate.From> newAllocate.To)
+           if (newAllocate.From> newAllocate.To)
             {
                 return "InValid";
             }
@@ -80,23 +75,43 @@ namespace UniversityManagementSystem.BLL
             string msg = "Ok";
             foreach (AllocateClassRoom oldAllocate in listInRooms)
             {
-                if (newAllocate.From>oldAllocate.From && newAllocate.To<oldAllocate.To)
+                DateTime oldForm = DateTime.Parse(oldAllocate.From);
+                DateTime oldTo = DateTime.Parse(oldAllocate.To);
+
+                if (newAllocate.From <= oldForm)
+                {
+                    if (newAllocate.To > oldForm)
+                    {
+                        msg = "Full";
+                    }
+                }
+               else if (newAllocate.From > oldForm && newAllocate.From < oldTo)
                 {
                     msg = "Full";
-                }
-                else if (newAllocate.From < oldAllocate.From && newAllocate.To > oldAllocate.To)
-                {
-                    msg = "Full";
-                }
-                else if(newAllocate.From>oldAllocate.From && newAllocate.From<oldAllocate.To)
-                {
-                    msg = "Full";  
-                }
-                else if(newAllocate.From<oldAllocate.From && newAllocate.To>oldAllocate.From && newAllocate.To<oldAllocate.To)
-                {
-                    msg = "Full"; 
                 }
 
+
+
+                //if (newAllocate.From>=oldForm && newAllocate.To<=oldTo)
+                //{
+                //    msg = "Full";
+                //}
+                //else if (newAllocate.From <= oldForm && newAllocate.To >= oldTo)
+                //{
+                //    msg = "Full";
+                //}
+                //else if(newAllocate.From>oldForm && newAllocate.From<oldTo)
+                //{
+                //    msg = "Full";  
+                //}
+                //else if(newAllocate.From<=oldForm && newAllocate.To<=oldTo)
+                //{
+                //    msg = "Full"; 
+                //}
+                //else if (newAllocate.From <= oldForm && newAllocate.To > oldForm && newAllocate.To<oldTo)
+                //{
+                //    msg = "Full";
+                //}
 
 
             }
@@ -150,7 +165,7 @@ namespace UniversityManagementSystem.BLL
         {
             IEnumerable<AllocateClassRoom> allocatedRoom =
                 aUnitOfWork.Repository<AllocateClassRoom>().GetList(x => x.DepartmentId == departmentId && x.IsAcTive==true);
-           // List<AllocateClassRoom> tempList = allocatedRoom.DistinctBy(x => x.CourseId).ToList();
+           
             List<Course> tempList = aUnitOfWork.Repository<Course>().GetList(x => x.DepartmentId == departmentId).ToList();
 
             List<AllocateRoomViewModel>newList=new List<AllocateRoomViewModel>();
@@ -167,10 +182,12 @@ namespace UniversityManagementSystem.BLL
                 foreach (AllocateClassRoom classRoom in forcourseList)
                 {
                     b--;
+                    DateTime from = DateTime.Parse(classRoom.From);
+                    DateTime to = DateTime.Parse(classRoom.To);
                     Room aRoom = aUnitOfWork.Repository<Room>().GetModelById(classRoom.RoomId);
                         Day aDay = aUnitOfWork.Repository<Day>().GetModelById(classRoom.DayId);
-                        info += "R.No : " + aRoom.RoomNumber + ", " + aDay.ShortName + ", " + classRoom.From.ToString("hh:mm tt") + " - " +
-                                classRoom.To.ToString("hh:mm tt") + "";
+                        info += "R.No : " + aRoom.RoomNumber + ", " + aDay.ShortName + ", " + from.ToString("hh:mm tt") + " - " +
+                                to.ToString("hh:mm tt") + "";
                     if (b > 0)
                     {
                         info += ";<br/>";

@@ -23,15 +23,10 @@ namespace UniversityManagementSystem.Models.EntityModel
 
         public int DayId { get; set; }
         [Required]
-        [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
-        public DateTime From { get; set; }
+        public string From { get; set; }
         [Required]
         [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
-
-       
-        public DateTime To { get; set; }
+        public string To { get; set; }
        
         public bool IsAcTive { get; set; }
 

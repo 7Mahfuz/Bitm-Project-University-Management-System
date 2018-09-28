@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201809190817089_Nine.Designer.cs">
       <DependentUpon>201809190817089_Nine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809260853243_Ten.cs" />
+    <Compile Include="Migrations\201809260853243_Ten.Designer.cs">
+      <DependentUpon>201809260853243_Ten.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EntityModel\AllocateClassRoom.cs" />
     <Compile Include="Models\EntityModel\CourseAssignTeacher.cs" />
@@ -337,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809190817089_Nine.resx">
       <DependentUpon>201809190817089_Nine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809260853243_Ten.resx">
+      <DependentUpon>201809260853243_Ten.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

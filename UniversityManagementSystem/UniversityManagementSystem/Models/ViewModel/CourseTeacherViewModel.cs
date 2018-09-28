@@ -13,6 +13,7 @@ namespace UniversityManagementSystem.Models
         [Required]
         [Display(Name = "Teacher")]
         public int TeacherId { get; set; }
+      
         [Display(Name = "Credit to take")]
         public double CreditToTake { get; set; }
         [Display(Name = "Remaning Credit")]

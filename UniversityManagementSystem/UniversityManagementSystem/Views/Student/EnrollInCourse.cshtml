@@ -69,9 +69,13 @@
                                 <div class="col-md-offset-2 col-md-10">
                                     <input type="submit" value="Enroll" class="btn btn-default btn-success" />
                                     @{
-                                        if (ViewBag.message != null)
+                                        if (ViewBag.message == "Saved")
                                         {
-                                            <span id="fade" style="color: green"><font size="4">@ViewBag.message</font></span>
+                                            <span id="fade" style="color: green"><font size="4">Saved Succesfully</font></span>
+                                        }
+                                       else if (ViewBag.message != null)
+                                        {
+                                            <span id="fade" style="color: red"><font size="4">This Student Already have this course</font></span>
                                         }
                                     }
                                 </div>

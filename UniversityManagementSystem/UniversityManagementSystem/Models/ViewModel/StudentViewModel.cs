@@ -8,7 +8,8 @@ namespace UniversityManagementSystem.Models
 {[Serializable]
     public class StudentViewModel
     {
-        
+        [Required]
+        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Name must be contain only letters")]
         public string Name { get; set; }
         [Required]
         public string Email { get; set; }

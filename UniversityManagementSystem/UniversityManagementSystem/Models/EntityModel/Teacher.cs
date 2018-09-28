@@ -11,6 +11,7 @@ namespace UniversityManagementSystem.Models
     {    [Key]
         public int Id { get; set; }
         [Required]
+        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Name must be contain only letters")]
         public string Name { get; set; }
         public string Address { get; set; }
         [Required(ErrorMessage = "Email is Required")]
